@@ -4,18 +4,28 @@ import { motion } from "framer-motion";
 
 import areaChart from "@/assets/charts/area-chart.png";
 import barChart from "@/assets/charts/bar-chart.png";
+import clusteredBar from "@/assets/charts/clustered-bar.png";
+import columnLine from "@/assets/charts/column-line.png";
+import gantt from "@/assets/charts/gantt.png";
+import graph from "@/assets/charts/graph.png";
 import lineChart from "@/assets/charts/line-chart.png";
 import mapTree from "@/assets/charts/map-tree.png";
 import pieChart from "@/assets/charts/pie-chart.png";
 import scatterGraph from "@/assets/charts/scatter-graph.png";
+import histogram from "@/assets/charts/histogram.png";
 
 const charts = [
   { key: 1, src: areaChart, alt: "area-chart" },
   { key: 2, src: barChart, alt: "bar-chart" },
   { key: 3, src: lineChart, alt: "line-chart" },
-  { key: 4, src: mapTree, alt: "map-tree" },
-  { key: 5, src: pieChart, alt: "pie-chart" },
-  { key: 6, src: scatterGraph, alt: "scatter-graph" },
+  { key: 4, src: clusteredBar, alt: "clustered-bar" },
+  { key: 5, src: mapTree, alt: "map-tree" },
+  { key: 6, src: graph, alt: "graph" },
+  { key: 7, src: pieChart, alt: "pie-chart" },
+  { key: 8, src: columnLine, alt: "column-line" },
+  { key: 9, src: scatterGraph, alt: "scatter-graph" },
+  { key: 10, src: gantt, alt: "gantt" },
+  { key: 11, src: histogram, alt: "histogram" },
 ];
 
 export const Ticker = () => {
@@ -29,41 +39,25 @@ export const Ticker = () => {
           <motion.div
             initial={{ translateX: 0 }}
             animate={{ translateX: "-50%" }}
-            transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-            className="flex flex-none gap-24 pr-24"
+            transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+            className="flex flex-none gap-20 pr-20 sm:gap-24 sm:pr-24"
           >
-            {charts.map(({ key, src, alt }) => (
-              <Image
-                key={key}
-                src={src}
-                alt={alt}
-                className="h-9 w-auto flex-none"
-              ></Image>
-            ))}
-            {charts.map(({ key, src, alt }) => (
-              <Image
-                key={key}
-                src={src}
-                alt={alt}
-                className="h-9 w-auto flex-none"
-              ></Image>
-            ))}
-            {charts.map(({ key, src, alt }) => (
-              <Image
-                key={key}
-                src={src}
-                alt={alt}
-                className="h-9 w-auto flex-none"
-              ></Image>
-            ))}
-            {charts.map(({ key, src, alt }) => (
-              <Image
-                key={key}
-                src={src}
-                alt={alt}
-                className="h-9 w-auto flex-none"
-              ></Image>
-            ))}
+            {(() => {
+              const images = [];
+              for (let i = 0; i < 4; i++) {
+                images.push(
+                  ...charts.map(({ key, src, alt }) => (
+                    <Image
+                      key={`${key}-${i}`}
+                      src={src}
+                      alt={alt}
+                      className="h-9 w-auto flex-none"
+                    />
+                  ))
+                );
+              }
+              return images;
+            })()}
           </motion.div>
         </div>
       </div>
