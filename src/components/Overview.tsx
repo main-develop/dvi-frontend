@@ -4,7 +4,7 @@ export const Overview = () => {
   return (
     <div className="relative py-[72px] sm:py-24 bg-black text-white overview-background overflow-clip">
       {/* Radial element start */}
-      <div className="absolute radial-element bg-black rounded-[100%] left-1/2 -translate-x-1/2 border"></div>
+      <div className="absolute radial-element bg-black rounded-[100%] left-1/2 -translate-x-1/2"></div>
       {/* Radial element end */}
 
       <div className="container relative">

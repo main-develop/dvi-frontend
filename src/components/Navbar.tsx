@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import {
   MotionValue,
   ValueAnimationTransition,
@@ -12,6 +13,12 @@ import { RefObject, useEffect, useRef } from "react";
 
 import logoImage from "@/assets/images/logo1.png";
 import MenuIcon from "@/assets/icons/menu.svg";
+
+const pages = [
+  { name: "About", href: "/about" },
+  { name: "Documentation", href: "/documentation" },
+  { name: "Help", href: "/help" },
+];
 
 const LoginButton = (): JSX.Element => {
   const xPosition: MotionValue<number> = useMotionValue(0);
@@ -49,9 +56,9 @@ const LoginButton = (): JSX.Element => {
     <motion.div
       ref={divRef}
       style={{ maskImage: maskImage }}
-      className="inset-0 -m-px border border-[#00406C] rounded-lg"
+      className="inset-0 -m-px border border-[#00406C] rounded-lg hover:scale-[1.01]"
     >
-      <button className="py-2 px-4 bg-[#001B29]/50 text-white rounded-lg border border-white/15">
+      <button className="py-2 px-4 login-button text-white rounded-lg border">
         Log in
       </button>
     </motion.div>
@@ -62,14 +69,16 @@ export const Navbar = (): JSX.Element => {
   return (
     <header className="sticky top-0 backdrop-blur-sm shadow-lg z-50">
       <div className="px-4 py-4 flex justify-between items-center">
-        <div className="relative">
-          <div className="absolute logo-background w-full top-2 bottom-0 blur-md"></div>
-          <Image
-            src={logoImage}
-            alt="logo"
-            className="relative h-12 w-12"
-          ></Image>
-        </div>
+        <Link href="/">
+          <div className="relative cursor-pointer">
+            <div className="absolute logo-background w-full top-2 bottom-0 blur-md"></div>
+            <Image
+              src={logoImage}
+              alt="logo"
+              className="relative h-12 w-12"
+            ></Image>
+          </div>
+        </Link>
         {/* For small screens */}
         {/* <div className="h-10 w-10 inline-flex justify-center items-center border border-white border-opacity-30 rounded-lg sm:hidden">
           <MenuIcon className="text-white"></MenuIcon>
@@ -78,26 +87,16 @@ export const Navbar = (): JSX.Element => {
           <LoginButton></LoginButton>
         </div>
         {/* For wide screens */}
-        {/* TODO: Use mapping instead */}
         <nav className="items-center gap-6 hidden sm:flex">
-          <a
-            href="#"
-            className="text-opacity-60 text-white hover:text-opacity-100 transition"
-          >
-            About
-          </a>
-          <a
-            href="#"
-            className="text-opacity-60 text-white hover:text-opacity-100 transition"
-          >
-            Updates
-          </a>
-          <a
-            href="#"
-            className="text-opacity-60 text-white hover:text-opacity-100 transition"
-          >
-            Help
-          </a>
+          {pages.map(({ href, name }) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              {name}
+            </Link>
+          ))}
           <LoginButton></LoginButton>
         </nav>
       </div>
