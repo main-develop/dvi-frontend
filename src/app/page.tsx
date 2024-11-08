@@ -1,11 +1,5 @@
-import { Overview } from "@/components/Overview";
-import { Ticker } from "@/components/Ticker";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <>
-      <Overview></Overview>
-      <Ticker></Ticker>
-    </>
-  );
+export default function HomeRedirect() {
+  redirect("/home");
 }

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
-import "./globals.css";
+import "@/shared/styles/globals.css";
 import clsx from "clsx";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import { Header } from "@/components/header/Header";
+import { Footer } from "@/components/footer/Footer";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(dmSans.className, "antialiased", "bg-black")}>
-        <Navbar></Navbar>
+        <Header></Header>
         {children}
         <Footer></Footer>
       </body>

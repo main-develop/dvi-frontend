@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====OVERVIEW SECTION===== */
+
+/* Overview gradient span */
+.gradient-span {
+  background: linear-gradient(
+    to right,
+    rgb(248, 122, 255),
+    rgb(251, 147, 208),
+    rgb(255, 221, 153),
+    rgb(195, 240, 178),
+    rgb(47, 216, 254)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+/* =====TICKER SECTION===== */
+
+/* Ticker transition */
+.ticker-transition::before,
+.ticker-transition::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  z-index: 10;
+}
+
+.ticker-transition::before {
+  left: 0;
+  background: linear-gradient(to right, #000, rgb(0, 0, 0, 0));
+}
+
+.ticker-transition::after {
+  right: 0;
+  background: linear-gradient(to left, #000, rgb(0, 0, 0, 0));
+}

@@ -2,17 +2,17 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import areaChart from "@/assets/charts/area-chart.png";
-import barChart from "@/assets/charts/bar-chart.png";
-import clusteredBar from "@/assets/charts/clustered-bar.png";
-import columnLine from "@/assets/charts/column-line.png";
-import gantt from "@/assets/charts/gantt.png";
-import graph from "@/assets/charts/graph.png";
-import lineChart from "@/assets/charts/line-chart.png";
-import mapTree from "@/assets/charts/map-tree.png";
-import pieChart from "@/assets/charts/pie-chart.png";
-import scatterGraph from "@/assets/charts/scatter-graph.png";
-import histogram from "@/assets/charts/histogram.png";
+import areaChart from "@/shared/assets/charts/area-chart.png";
+import barChart from "@/shared/assets/charts/bar-chart.png";
+import clusteredBar from "@/shared/assets/charts/clustered-bar.png";
+import columnLine from "@/shared/assets/charts/column-line.png";
+import gantt from "@/shared/assets/charts/gantt.png";
+import graph from "@/shared/assets/charts/graph.png";
+import lineChart from "@/shared/assets/charts/line-chart.png";
+import mapTree from "@/shared/assets/charts/map-tree.png";
+import pieChart from "@/shared/assets/charts/pie-chart.png";
+import scatterGraph from "@/shared/assets/charts/scatter-graph.png";
+import histogram from "@/shared/assets/charts/histogram.png";
 
 const charts = [
   { key: 1, src: areaChart, alt: "area-chart" },
