@@ -46,10 +46,15 @@ export const LoginButton = (): JSX.Element => {
     <motion.div
       ref={divRef}
       style={{ maskImage: maskImage }}
-      className="inset-0 -m-px border border-[#00406C] login-button rounded-lg hover:scale-[1.01]"
+      className="inset-0 -m-px border border-[#00406C] login-button rounded-lg"
     >
-      <button className="py-2 px-4 login-button text-white rounded-lg border">
-        Log in
+      <button className="text-white/90 rounded-lg border login-button">
+        <span className="absolute inset-0 rounded-xl p-[2px] group-hover:opacity-100"></span>
+        <span className="relative z-10 block py-2 px-4 rounded-xl">
+          <div className="relative z-10 flex items-center space-x-2">
+            <span className="transition-all duration-500">Log in</span>
+          </div>
+        </span>
       </button>
     </motion.div>
   );
