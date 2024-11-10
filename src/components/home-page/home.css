@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====OVERVIEW SECTION===== */
+
+/* Gradient span */
+/* .gradient-span {
+  background: linear-gradient(
+    to right,
+    rgb(248, 122, 255),
+    rgb(251, 147, 208),
+    rgb(255, 221, 153),
+    rgb(195, 240, 178),
+    rgb(47, 216, 254)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+} */
+
+/* "Start for Free" button */
+
+.start-for-free-button {
+  background-color: #1f2937;
+  transition: transform 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  75% {
+    opacity: 0.75;
+  }
+}
+
+.start-for-free-button:hover {
+  color: white;
+  transform: scale(1.05);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  box-shadow: 0 4px 6px rgba(69, 12, 175, 0.9);
+}
+
+.start-for-free-button:active {
+  transform: scale(0.95);
+}
+
+/* "Start for Free" span background gradient */
+
+.span-gradient-bg {
+  opacity: 0;
+  background: linear-gradient(to right, #38b2ac, #4299e1, #9f7aea);
+  transition: opacity 1.5s ease;
+}
+
+/* =====TICKER SECTION===== */
+
+/* Ticker transition */
+.ticker-transition::before,
+.ticker-transition::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  z-index: 10;
+}
+
+.ticker-transition::before {
+  left: 0;
+  background: linear-gradient(to right, #000, rgb(0, 0, 0, 0));
+}
+
+.ticker-transition::after {
+  right: 0;
+  background: linear-gradient(to left, #000, rgb(0, 0, 0, 0));
+}

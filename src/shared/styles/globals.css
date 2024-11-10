@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Gradient background */
+.gradient-background {
+  background: linear-gradient(
+    to bottom,
+    rgb(0, 0, 0),
+    rgba(0, 14, 20, 1),
+    rgba(0, 17, 26, 1),
+    rgba(0, 27, 41, 1),
+    rgba(0, 34, 51, 1),
+    rgb(0, 48, 71, 1),
+    rgb(0, 61, 92, 1)
+  );
+}
+
+/* Background radial element */
+.radial-element {
+  height: 375px;
+  width: 750px;
+  border: 1px solid rgb(0, 61, 92);
+  background: radial-gradient(closest-side, rgb(0, 0, 0) 82%, rgb(0, 61, 92));
+  top: calc(100% - 96px);
+}
+
+@media (min-width: 640px) {
+  .radial-element {
+    width: 1536px;
+    height: 768px;
+    top: calc(100% - 120px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .radial-element {
+    width: 2400px;
+    height: 1200px;
+  }
+}
+
+/* Gradients */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    rgba(0, 14, 20, 1),
+    rgba(0, 17, 26, 1),
+    rgba(0, 20, 31, 1),
+    rgba(0, 24, 36, 1),
+    rgba(0, 27, 41, 1),
+    rgba(0, 34, 51, 1),
+    rgb(0, 41, 61, 1),
+    rgb(0, 48, 71, 1),
+    rgb(0, 54, 82, 1),
+    rgb(0, 61, 92, 1)
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #3a015cff,
+    #32004fff,
+    #220135ff,
+    #190028ff,
+    #11001cff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    rgb(0, 17, 28),
+    rgb(0, 21, 35),
+    rgb(0, 26, 44),
+    rgb(0, 33, 55),
+    rgb(0, 37, 62),
+    rgb(0, 41, 69),
+    rgb(0, 46, 78),
+    rgb(0, 51, 86),
+    rgb(0, 58, 97),
+    rgb(0, 64, 108)
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #022f40ff,
+    #38aeccff,
+    #0090c1ff,
+    #183446ff,
+    #046e8fff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #310055ff,
+    #3c0663ff,
+    #4a0a77ff,
+    #5a108fff,
+    #6818a5ff,
+    #8b2fc9ff,
+    #ab51e3ff,
+    #bd68eeff,
+    #d283ffff,
+    #dc97ffff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #b7094cff,
+    #a01a58ff,
+    #892b64ff,
+    #723c70ff,
+    #5c4d7dff,
+    #455e89ff,
+    #2e6f95ff,
+    #1780a1ff,
+    #0091adff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #2d00f7ff,
+    #6a00f4ff,
+    #8900f2ff,
+    #a100f2ff,
+    #b100e8ff,
+    #bc00ddff,
+    #d100d1ff,
+    #db00b6ff,
+    #e500a4ff,
+    #f20089ff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #10002bff,
+    #240046ff,
+    #3c096cff,
+    #5a189aff,
+    #7b2cbfff,
+    #9d4eddff,
+    #c77dffff,
+    #e0aaffff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #f72585ff,
+    #7209b7ff,
+    #3a0ca3ff,
+    #4361eeff,
+    #4cc9f0ff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #7400b8ff,
+    #6930c3ff,
+    #5e60ceff,
+    #5390d9ff,
+    #4ea8deff,
+    #48bfe3ff,
+    #56cfe1ff,
+    #64dfdfff,
+    #72efddff,
+    #80ffdbff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #ffbe0bff,
+    #fb5607ff,
+    #ff006eff,
+    #8338ecff,
+    #3a86ffff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #f72585ff,
+    #b5179eff,
+    #7209b7ff,
+    #560badff,
+    #480ca8ff,
+    #3a0ca3ff,
+    #3f37c9ff,
+    #4361eeff,
+    #4895efff,
+    #4cc9f0ff
+  );
+} */
+
+/* .gradient {
+  background: linear-gradient(
+    to right,
+    #03071eff,
+    #370617ff,
+    #6a040fff,
+    #9d0208ff,
+    #d00000ff,
+    #dc2f02ff,
+    #e85d04ff,
+    #f48c06ff,
+    #faa307ff,
+    #ffba08ff
+  );
+} */
