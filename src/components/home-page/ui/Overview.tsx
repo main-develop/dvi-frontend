@@ -50,7 +50,7 @@ export const Overview = () => {
     <motion.div
       initial="hidden"
       animate="visible"
-      className="relative flex flex-col sm:flex-row items-center justify-center px-6 sm:px-20 py-16 sm:py-24 w-full z-[20] gradient-background overflow-clip"
+      className="sm:h-[786px] relative flex flex-col sm:flex-row items-center justify-center px-6 sm:px-20 py-16 -mt-20 sm:py-24 w-full z-[20] gradient-background overflow-clip"
     >
       <div className="absolute radial-element bg-black rounded-[100%] left-1/2 -translate-x-1/2"></div>
       <div className="relative h-full w-full flex flex-col gap-4 sm:gap-5 justify-center m-auto text-center sm:text-start">
