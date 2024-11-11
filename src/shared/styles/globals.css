@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Logo button background */
+.logo-background {
+  background: linear-gradient(
+    to right,
+    rgb(0, 49, 80),
+    rgb(0, 51, 86),
+    rgb(0, 58, 97),
+    rgb(0, 64, 108)
+  );
+}
+
 /* Gradient background */
 .gradient-background {
   background: linear-gradient(

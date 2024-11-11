@@ -1,4 +1,4 @@
-import { BlankPage } from "@/components/blank-page/BlankPage";
+import { BlankPage } from "@/components/main/blank-page/BlankPage";
 
 export default function Help() {
   return <BlankPage></BlankPage>;

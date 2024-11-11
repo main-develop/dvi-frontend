@@ -9,8 +9,15 @@ import {
   useMotionValue,
 } from "framer-motion";
 import { RefObject, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 export const LoginButton = (): JSX.Element => {
+  const router = useRouter();
+
+  const handleLoginRedirect = () => {
+    router.push("/authentication/log-in");
+  };
+
   const xPosition: MotionValue<number> = useMotionValue(0);
   const yPosition: MotionValue<number> = useMotionValue(0);
   const maskImage: MotionValue<string> = useMotionTemplate`radial-gradient(150px 150px at ${xPosition}% ${yPosition}%, black, transparent)`;
@@ -48,7 +55,10 @@ export const LoginButton = (): JSX.Element => {
       style={{ maskImage: maskImage }}
       className="inset-0 -m-px border border-[#00406C] login-button rounded-lg"
     >
-      <button className="text-white/90 rounded-lg border login-button">
+      <button
+        onClick={handleLoginRedirect}
+        className="text-white/90 rounded-lg border login-button"
+      >
         <span className="absolute inset-0 rounded-xl p-[2px] group-hover:opacity-100"></span>
         <span className="relative z-10 block py-2 px-4 rounded-xl">
           <div className="relative z-10 flex items-center space-x-2">
