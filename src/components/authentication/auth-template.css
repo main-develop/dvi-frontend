@@ -51,7 +51,7 @@
   content: "";
   position: absolute;
   top: 100%;
-  left: -105;
+  left: -105px;
   height: 5%;
   width: 170%;
   background-color: #00406c;
@@ -59,6 +59,24 @@
   opacity: 0.7;
   transform: perspective(1.5em) rotateX(35deg) scale(1, 0.6);
   animation: pulse 5s ease-in-out infinite;
+}
+
+@media (min-width: 360px) {
+  .neon-lighting::after {
+    top: 100%;
+    left: 0px;
+    height: 5%;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .neon-lighting::after {
+    top: 100%;
+    left: -105px;
+    height: 5%;
+    width: 170%;
+  }
 }
 
 /* INPUT SECTION */
@@ -85,30 +103,82 @@
 .form-group label {
   justify-content: center;
   position: absolute;
-  top: 12px;
+  top: 12.5px;
   left: 16.5px;
   pointer-events: none;
   transition: 0.5s;
 }
 
-.form-group input:focus ~ label {
+.form-group input:focus ~ label,
+.form-group input.filled ~ label {
   top: -10px;
   left: 8px;
   background: #111827;
   height: min-content;
   padding: 0 5px;
   font-size: 13px;
+}
+
+.form-group input:focus ~ label {
   color: #00406c;
 }
 
-.form-group input:not(:focus):valid ~ label {
-  top: -10px;
-  left: 8px;
-  background: #111827;
-  height: min-content;
-  padding: 0 5px;
-  font-size: 13px;
+.form-group input.filled:not(:focus) ~ label {
   color: #374151;
+}
+
+/* SELECT SECTION */
+
+.select:hover .options {
+  max-height: 150px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.select:hover .arrow {
+  transform: rotate(0deg);
+}
+
+.select:hover .selected {
+  border-color: #00406c;
+}
+
+.selected {
+  color: #9ca3af;
+  border-color: #374151;
+  background-color: #111827;
+  padding: 0.85em 1em;
+  z-index: 10;
+}
+
+.arrow {
+  fill: #9ca3af;
+  transform: rotate(-90deg);
+  z-index: 100000;
+  transition: 300ms;
+}
+
+.options {
+  top: 100%;
+  left: 0;
+  border-color: #374151;
+  background-color: #111827;
+  max-height: 0;
+  transition:
+    max-height 300ms ease,
+    opacity 300ms ease,
+    visibility 300ms ease;
+  visibility: hidden;
+}
+
+.option {
+  color: #9ca3af;
+  background-color: #111827;
+  transition: background-color 300ms;
+}
+
+.option:hover {
+  background-color: #0b101f;
 }
 
 /* CHECKBOX SECTION */

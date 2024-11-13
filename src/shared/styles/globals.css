@@ -36,7 +36,7 @@
   top: calc(100% - 96px);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 360px) {
   .radial-element {
     width: 1536px;
     height: 768px;

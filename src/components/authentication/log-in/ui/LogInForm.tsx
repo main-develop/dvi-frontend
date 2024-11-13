@@ -1,3 +1,5 @@
+"use client";
+
 export const LogInForm = () => {
   return (
     <form className="mt-6">
@@ -7,7 +9,10 @@ export const LogInForm = () => {
             type="text"
             name="email"
             id="email"
-            required
+            required={true}
+            onChange={(e) =>
+              e.target.classList.toggle("filled", e.target.value !== "")
+            }
             className="border border-solid rounded-md outline-none w-[100%]"
           />
           <label htmlFor="email">Email address</label>
@@ -19,7 +24,10 @@ export const LogInForm = () => {
             type="password"
             name="password"
             id="password"
-            required
+            required={true}
+            onChange={(e) =>
+              e.target.classList.toggle("filled", e.target.value !== "")
+            }
             className="border border-solid rounded-md outline-none w-[100%]"
           />
           <label htmlFor="password">Password</label>

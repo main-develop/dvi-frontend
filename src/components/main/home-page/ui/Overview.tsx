@@ -7,9 +7,16 @@ import {
   useMotionValue,
 } from "framer-motion";
 import { slideInFromLeft, slideInFromRight } from "@/utils/motions";
+import { useRouter } from "next/navigation";
 import dashboardImage from "@/shared/assets/images/dashboard.png";
 
 export const Overview = () => {
+  const router = useRouter();
+
+  const handleSignUpRedirect = () => {
+    router.push("/authentication/sign-up");
+  };
+
   const xPosition = useMotionValue(0);
   const yPosition = useMotionValue(0);
   const xSize = useMotionValue(102);
@@ -75,7 +82,10 @@ export const Overview = () => {
           className="py-2 sm:py-3 w-[155px] mx-auto sm:mx-0"
         >
           <div className="relative group">
-            <button className="relative inline-block p-px font-medium leading-6 text-white/90 shadow-xl drop-shadow-xl backdrop-blur-lg rounded-xl start-for-free-button">
+            <button
+              onClick={handleSignUpRedirect}
+              className="relative inline-block p-px font-medium leading-6 text-white/90 shadow-xl drop-shadow-xl backdrop-blur-lg rounded-xl start-for-free-button"
+            >
               <span className="absolute inset-0 rounded-xl span-gradient-bg p-[2px] group-hover:opacity-100"></span>
               <span className="relative z-10 block px-6 py-3 rounded-xl bg-gray-950">
                 <div className="relative z-10 flex items-center space-x-2">
