@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sidebar {
+  background-color: rgb(17, 17, 17);
+  /* color: #06568c; */
+  /* background-color: #1717176e; */
+  /* background-color: #181a1b; */
+}
