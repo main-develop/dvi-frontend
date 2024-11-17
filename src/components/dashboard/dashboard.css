@@ -2,9 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* .glassmorphism {
+  background-color: rgba(128, 128, 128, 0.2);
+  background-clip: padding-box;
+  backdrop-filter: blur(8px) saturate(100%) contrast(100%);
+}
+
+.dashboard {
+  background-image: url("/dashboard-background.jpg");
+  background-size: cover;
+  background-position: center;
+} */
+
 .sidebar {
-  background-color: rgb(17, 17, 17);
-  /* color: #06568c; */
-  /* background-color: #1717176e; */
-  /* background-color: #181a1b; */
+  background-color: #131516;
+  border-color: #ffffff33;
+}
+
+.navbar {
+  background-color: #131516;
+  border-color: #ffffff33;
+}
+
+.account-dropdown {
+  top: 50px;
+  right: 0px;
+  background-color: #131516;
+  border-color: #ffffff33;
+}
+
+.line {
+  height: 0.8px;
+  flex: 1 1 0%;
+  background-color: #374151;
 }
