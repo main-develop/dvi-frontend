@@ -26,7 +26,7 @@ export const AuthTemplate = ({
     <motion.div initial="hidden" animate="visible" variants={transition}>
       <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="form-container-wrapper neon-lighting">
-          <div className="form-container sm:w-[342px] p-6 sm:p-8 rounded-xl">
+          <div className="form-container sm:w-[360px] p-6 sm:p-8 rounded-xl">
             <div className="flex items-center justify-center">
               <div className="absolute logo-background h-16 w-16 blur-md"></div>
               <Link href="/home">
