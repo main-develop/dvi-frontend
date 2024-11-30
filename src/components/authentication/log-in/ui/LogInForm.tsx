@@ -37,7 +37,7 @@ export const LogInForm = () => {
     if (errorMessage) {
       setErrorMessage(null);
     }
-  }, [emailValue, passwordValue]);
+  }, [emailValue, passwordValue, errorMessage]);
 
   const onSubmit: SubmitHandler<logInSchema> = async (data) => {
     const response = await submitLogInForm(data);

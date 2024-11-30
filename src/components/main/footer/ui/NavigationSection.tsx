@@ -8,7 +8,7 @@ interface NavigationSectionProperties {
 export const NavigationSection = ({
   title,
   links,
-}: NavigationSectionProperties): JSX.Element => {
+}: NavigationSectionProperties): React.JSX.Element => {
   return (
     <div className="flex flex-col w-[140px]">
       <span className="text-lg">{title}</span>

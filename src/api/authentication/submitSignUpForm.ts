@@ -5,7 +5,7 @@ import { signUpSchema } from "@/types/authentication/signUpSchema";
 export async function submitSignUpForm(formData: signUpSchema) {
   try {
     const response = await fetch(
-      "http://127.0.0.1:5000/dvi-api/authentication/register",
+      "http://api:5000/dvi-api/authentication/register",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logoImage from "@/shared/assets/images/logo1.png";
 
-export const Logo = (): JSX.Element => {
+export const Logo = (): React.JSX.Element => {
   return (
     <Link href="/home">
       <div className="relative cursor-pointer">

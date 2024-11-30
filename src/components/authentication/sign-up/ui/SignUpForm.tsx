@@ -51,7 +51,7 @@ export const SignUpForm = (): React.JSX.Element => {
     if (errorMessage) {
       setErrorMessage(null);
     }
-  }, [emailValue]);
+  }, [emailValue, errorMessage]);
 
   const onSubmit: SubmitHandler<signUpSchema> = async (data) => {
     const response = await submitSignUpForm(data);

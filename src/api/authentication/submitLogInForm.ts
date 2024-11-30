@@ -5,7 +5,7 @@ import { logInSchema } from "@/types/authentication/logInSchema";
 export async function submitLogInForm(formData: logInSchema) {
   try {
     const response = await fetch(
-      "http://127.0.0.1:5000/dvi-api/authentication/login",
+      "http://api:5000/dvi-api/authentication/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

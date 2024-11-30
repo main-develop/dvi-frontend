@@ -10,7 +10,7 @@ import { slideInFromLeft, slideInFromRight } from "@/utils/motions";
 import { useRouter } from "next/navigation";
 import dashboardImage from "@/shared/assets/images/dashboard.png";
 
-export const Overview = () => {
+export const Overview = (): React.JSX.Element => {
   const router = useRouter();
 
   const handleSignUpRedirect = () => {
