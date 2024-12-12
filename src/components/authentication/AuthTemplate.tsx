@@ -51,7 +51,7 @@ export const AuthTemplate = ({
               <a
                 rel="noopener noreferrer"
                 href={footerLinkHref}
-                className="hover:text-[#f3f4f6da] transition"
+                className="hover:text-[#f3f4f6da] transition ml-[6px] underline"
               >
                 {footerLinkText}
               </a>

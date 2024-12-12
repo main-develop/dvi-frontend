@@ -7,8 +7,13 @@ import AccountIcon from "@/shared/assets/animations/account.json";
 import EditIcon from "@/shared/assets/animations/edit.json";
 import SettingsIcon from "@/shared/assets/animations/settings.json";
 import LogOutIcon from "@/shared/assets/animations/log-out.json";
+import { handleLogOut } from "@/api/authentication/handleLogOut";
+import { useRouter } from "next/navigation";
+import { getCookie } from "@/utils/getCookie";
 
 export const Navbar = (): React.JSX.Element => {
+  const router = useRouter();
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -33,6 +38,17 @@ export const Navbar = (): React.JSX.Element => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownOpen]);
+
+  const logOut = async () => {
+    const accessToken = getCookie("accessToken");
+    const response = await handleLogOut(accessToken);
+
+    if (response.success) {
+      document.cookie = `accessToken=; path=/; Secure; SameSite=Strict; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
+
+      router.push("/authentication/log-in");
+    }
+  };
 
   return (
     <div className="navbar h-[52px] border-b-[2px]">
@@ -111,8 +127,8 @@ export const Navbar = (): React.JSX.Element => {
                 <div className="line" />
               </div>
               <nav className="gap-1 text-[#9ca3af] text-[15px]">
-                <Link
-                  href="/authentication/log-in"
+                <button
+                  onClick={logOut}
                   className="relative flex items-center space-x-3 h-9 w-full focus:outline-none hover:bg-[#0e0e0e] hover:text-[#c1c9d6] rounded-md"
                 >
                   <DotLottieReact
@@ -121,7 +137,7 @@ export const Navbar = (): React.JSX.Element => {
                     className="w-[20px] h-[20px] ml-2"
                   ></DotLottieReact>
                   <span>Log out</span>
-                </Link>
+                </button>
               </nav>
             </div>
           )}

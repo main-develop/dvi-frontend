@@ -10,15 +10,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 export const LogInForm = () => {
   const router = useRouter();
 
-  const handleDashboardRedirect = () => {
-    router.push("/dashboard");
-  };
-
   const form = useForm<logInSchema>({
     resolver: zodResolver(LogInSchema),
     defaultValues: {
       email: "",
       password: "",
+      rememberMe: false,
     },
   });
 
@@ -42,8 +39,10 @@ export const LogInForm = () => {
   const onSubmit: SubmitHandler<logInSchema> = async (data) => {
     const response = await submitLogInForm(data);
 
-    if (response.success) {
-      handleDashboardRedirect();
+    if (response.success && response.accessToken) {
+      document.cookie = `accessToken=${response.accessToken}; path=/; Secure; SameSite=Strict${response.expires ? `; Expires=${response.expires}` : ""}`;
+
+      router.push("/dashboard");
     } else {
       setErrorMessage(response.error);
     }
@@ -88,8 +87,8 @@ export const LogInForm = () => {
           <div className="flex flex-row">
             <label className="cursor-pointer mb-[14px]">
               <input
+                {...register("rememberMe")}
                 type="checkbox"
-                name="remember-me"
                 id="remember-me"
                 className="hidden"
               />
