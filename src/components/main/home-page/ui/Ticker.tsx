@@ -28,7 +28,7 @@ const charts = [
   { key: 11, src: histogram, alt: "histogram" },
 ];
 
-export const Ticker = () => {
+export const Ticker = (): React.JSX.Element => {
   return (
     <div className="py-[72px] sm:py-24 bg-black text-white">
       <div className="container">

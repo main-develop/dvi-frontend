@@ -6,7 +6,7 @@ const pages = [
   { name: "Help", href: "/help" },
 ];
 
-export const PagesLinks = (): JSX.Element => {
+export const PagesLinks = (): React.JSX.Element => {
   return (
     <>
       {pages.map(({ href, name }) => (

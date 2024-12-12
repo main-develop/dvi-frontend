@@ -6,7 +6,7 @@ export const LogInPage = (): React.JSX.Element => {
     <AuthTemplate
       title="Welcome back!"
       form={<LogInForm />}
-      footerText="Don't have an account? "
+      footerText="Don't have an account?"
       footerLinkText="Sign up"
       footerLinkHref="/authentication/sign-up"
     ></AuthTemplate>

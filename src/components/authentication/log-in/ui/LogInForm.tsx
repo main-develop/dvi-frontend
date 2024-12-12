@@ -1,43 +1,94 @@
 "use client";
 
+import { submitLogInForm } from "@/api/authentication/submitLogInForm";
+import { LogInSchema, logInSchema } from "@/types/authentication/logInSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
 export const LogInForm = () => {
+  const router = useRouter();
+
+  const form = useForm<logInSchema>({
+    resolver: zodResolver(LogInSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
+  });
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = form;
+
+  const [errorMessage, setErrorMessage] = useState<null | string>(null);
+
+  const emailValue = watch("email");
+  const passwordValue = watch("password");
+  useEffect(() => {
+    if (errorMessage) {
+      setErrorMessage(null);
+    }
+  }, [emailValue, passwordValue, errorMessage]);
+
+  const onSubmit: SubmitHandler<logInSchema> = async (data) => {
+    const response = await submitLogInForm(data);
+
+    if (response.success && response.accessToken) {
+      document.cookie = `accessToken=${response.accessToken}; path=/; Secure; SameSite=Strict${response.expires ? `; Expires=${response.expires}` : ""}`;
+
+      router.push("/dashboard");
+    } else {
+      setErrorMessage(response.error);
+    }
+  };
+
   return (
-    <form className="mt-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
       <div className="input-group my-1 text-sm">
         <div className="form-group">
           <input
+            {...register("email")}
             type="text"
-            name="email"
             id="email"
-            required={true}
             onChange={(e) =>
               e.target.classList.toggle("filled", e.target.value !== "")
             }
             className="border border-solid rounded-md outline-none w-[100%]"
           />
+          <p className="text-[13px] text-red-800 w-[136px] sm:w-[100%]">
+            {errors.email && errors.email.message}
+          </p>
           <label htmlFor="email">Email address</label>
         </div>
       </div>
       <div className="input-group mb-1 mt-3 text-sm">
         <div className="form-group">
           <input
+            {...register("password")}
             type="password"
-            name="password"
             id="password"
-            required={true}
             onChange={(e) =>
               e.target.classList.toggle("filled", e.target.value !== "")
             }
             className="border border-solid rounded-md outline-none w-[100%]"
           />
+          <p className="text-[13px] text-red-800 w-[136px] sm:w-[100%]">
+            {errors.password && errors.password.message}
+          </p>
           <label htmlFor="password">Password</label>
         </div>
         <div className="flex flex-row justify-between mb-2 mt-[14px]">
           <div className="flex flex-row">
             <label className="cursor-pointer mb-[14px]">
               <input
+                {...register("rememberMe")}
                 type="checkbox"
-                name="remember-me"
                 id="remember-me"
                 className="hidden"
               />
@@ -69,7 +120,13 @@ export const LogInForm = () => {
           </div>
         </div>
       </div>
-      <button className="log-in-button block w-[100%] p-3 mt-8 text-center font-semibold border-none rounded-md">
+      {errorMessage && (
+        <p className="text-[13px] text-red-800">{errorMessage}</p>
+      )}
+      <button
+        type="submit"
+        className="log-in-button block w-[100%] p-3 mt-8 text-center font-semibold border-none rounded-md"
+      >
         Log in
       </button>
     </form>

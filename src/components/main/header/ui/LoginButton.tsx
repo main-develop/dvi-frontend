@@ -11,7 +11,7 @@ import {
 import { RefObject, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-export const LoginButton = (): JSX.Element => {
+export const LoginButton = (): React.JSX.Element => {
   const router = useRouter();
 
   const handleLoginRedirect = () => {
@@ -47,7 +47,7 @@ export const LoginButton = (): JSX.Element => {
 
     animate(xPosition, [0, 100, 100, 0, 0], options);
     animate(yPosition, [0, 0, 100, 100, 0], options);
-  }, []);
+  }, [xPosition, yPosition]);
 
   return (
     <motion.div

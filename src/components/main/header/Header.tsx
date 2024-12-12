@@ -3,7 +3,7 @@ import { Logo } from "./ui/Logo";
 import { PagesLinks } from "./ui/PagesLinks";
 import { LoginButton } from "./ui/LoginButton";
 
-export const Header = (): JSX.Element => {
+export const Header = (): React.JSX.Element => {
   return (
     <header className="sticky top-0 backdrop-blur-sm shadow-lg z-50">
       <div className="px-4 py-4 flex justify-between items-center">
