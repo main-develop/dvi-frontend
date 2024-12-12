@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import { transition } from "@/utils/motions";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";

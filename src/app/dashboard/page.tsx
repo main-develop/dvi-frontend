@@ -1,5 +1,5 @@
 import { DashboardTemplate } from "@/components/dashboard/DashboardTemplate";
 
-export default function DashboardPage() {
-  return <DashboardTemplate children={undefined}></DashboardTemplate>;
+export default function DashboardPage(): React.JSX.Element {
+  return <DashboardTemplate>children={undefined}</DashboardTemplate>;
 }
