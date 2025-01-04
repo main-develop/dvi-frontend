@@ -46,7 +46,7 @@ export const Sidebar = (): React.JSX.Element => {
               <li key={section.name}>
                 <Link
                   href={section.href}
-                  className="relative flex flex-row items-center h-11 rounded-lg focus:outline-none hover:bg-[#0e0e0e] text-[#9ca3af] hover:text-[#c1c9d6]"
+                  className="relative flex flex-row items-center h-11 rounded-lg focus:outline-none hover:bg-[#0e0e0e] text-[#9ca3af] hover:text-[#c1c9d6] transition-all duration-500"
                 >
                   <span className="inline-flex justify-center items-center ml-3">
                     <DotLottieReact

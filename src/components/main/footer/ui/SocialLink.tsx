@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 
-interface SocialLinkProperties {
+type SocialLinkProperties = {
   href: string;
   icon: ReactNode;
-}
+};
 
 export const SocialLink = ({
   href,

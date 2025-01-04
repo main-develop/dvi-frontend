@@ -205,7 +205,6 @@ input:checked ~ svg .path {
 
 .log-in-button {
   color: #9ca3af;
-
   background-color: transparent;
   border: 0;
   outline: 1px solid #003d5c;

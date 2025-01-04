@@ -8,7 +8,11 @@ import { Ticker } from "@/components/main/home-page/ui/Ticker";
 
 export const HomePage = (): React.JSX.Element => {
   return (
-    <motion.div initial="hidden" animate="visible" variants={transition}>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={transition(0.4, 0.5)}
+    >
       <Overview></Overview>
       <Ticker></Ticker>
     </motion.div>
