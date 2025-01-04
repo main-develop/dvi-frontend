@@ -8,7 +8,6 @@ export function getCookie(name: string): string | null {
     const [key, value] = cookie.split("=");
 
     if (key === name) {
-      console.log(decodeURIComponent(value));
       return decodeURIComponent(value);
     }
   }

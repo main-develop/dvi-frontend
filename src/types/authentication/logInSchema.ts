@@ -1,8 +1,8 @@
 import zod from "zod";
 
 export const LogInSchema = zod.object({
-  email: zod.string().min(1, { message: "This field is required." }).email(),
-  password: zod.string().min(1, { message: "This field is required." }),
+  email: zod.string().min(1, { message: "This field is required" }).email(),
+  password: zod.string().min(1, { message: "This field is required" }),
   rememberMe: zod.boolean().optional(),
 });
 

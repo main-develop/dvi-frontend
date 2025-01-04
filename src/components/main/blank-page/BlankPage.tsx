@@ -7,7 +7,11 @@ import LottieAnimation from "@/shared/assets/animations/exclamation-mark-black.j
 
 export const BlankPage = (): React.JSX.Element => {
   return (
-    <motion.div initial="hidden" animate="visible" variants={transition}>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={transition(0.4, 0.5)}
+    >
       <div className="relative flex flex-col h-[623px] sm:h-[737.6px] gradient-background overflow-clip items-center justify-center">
         <div className="absolute radial-element rounded-[100%] left-1/2 -translate-x-1/2"></div>
         {/* For small screens */}

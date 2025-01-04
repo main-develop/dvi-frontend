@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.settings-page {
+  background-color: #131516;
+}
+
+.line {
+  height: 0.8px;
+  flex: 1 1 0%;
+  background-color: #ffffff33;
+}
+
+/* SIDEBAR SECTION */
+
+.sidebar {
+  border-color: #ffffff33;
+}
+
+.previous-page {
+  border: solid 2px;
+  border-color: #9ca3afa3;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.previous-page:hover {
+  background-color: #0e0e0e;
+  border-color: #9ca3afc5;
+}
+
+.previous-page:active {
+  background-color: #000000;
+}
+
+/* INPUT SECTION */
+
+.input-group label {
+  color: #62666e;
+}
+
+.input-group input {
+  background-color: #131516;
+  border-color: #374151;
+  color: #9ca3af;
+  padding: 0.75rem 1rem;
+}
+
+.input-group input:focus {
+  border-color: #00406c;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-group label {
+  justify-content: center;
+  position: absolute;
+  top: 12.5px;
+  left: 16.5px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.form-group input:focus ~ label,
+.form-group input.filled ~ label {
+  top: -10px;
+  left: 8px;
+  background: #131516;
+  height: min-content;
+  padding: 0 5px;
+  font-size: 13px;
+}
+
+.form-group input:focus ~ label {
+  color: #00406c;
+}
+
+.form-group input.filled:not(:focus) ~ label {
+  color: #374151;
+}
+
+/* SELECT SECTION */
+
+.select:hover .options {
+  max-height: 150px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.select:hover .arrow {
+  transform: rotate(0deg);
+}
+
+.select:hover .selected {
+  border-color: #00406c;
+}
+
+.selected {
+  color: #9ca3af;
+  font-size: 15px;
+  border-color: #374151;
+  background-color: #131516;
+  padding: 0.85em 1em;
+  z-index: 10;
+}
+
+.arrow {
+  fill: #9ca3af;
+  transform: rotate(-90deg);
+  z-index: 100000;
+  transition: 300ms;
+}
+
+.options {
+  top: 100%;
+  left: 0;
+  border-color: #374151;
+  background-color: #131516;
+  max-height: 0;
+  transition:
+    max-height 300ms ease,
+    opacity 300ms ease,
+    visibility 300ms ease;
+  visibility: hidden;
+}
+
+.option {
+  color: #9ca3af;
+  font-size: 15px;
+  background-color: #131516;
+  transition: background-color 500ms;
+}
+
+.option:hover {
+  background-color: #0e0e0e;
+}
+
+/* SUBMIT BUTTON SECTION */
+
+.submit-button {
+  outline: 2px solid #003d5c;
+  background-color: #00283c84;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.submit-button:hover {
+  outline: 2px solid #004365;
+  background-color: #00375384;
+}
+
+.submit-button:hover span {
+  color: #015f8f;
+}
+
+.submit-button:active {
+  background-color: #001722;
+}
+
+/* DELETE BUTTON SECTION */
+
+.delete-account-button {
+  border: solid 2px;
+  border-color: #af0505;
+  background-color: #5b01015f;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.delete-account-button:hover {
+  border: solid 2px;
+  border-color: #9b0404;
+  background-color: #6401018e;
+}
+
+.delete-account-button:hover span {
+  color: #c11111;
+}
+
+.delete-account-button:active {
+  background-color: #580808;
+}
+
+/* CANCEL BUTTON SECTION */
+
+.cancel-button {
+  border: solid 2px;
+  border-color: #949698a6;
+  background-color: #b2b4b64f;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.cancel-button:hover {
+  border: solid 2px;
+  border-color: #82868b;
+  background-color: #94969890;
+}
+
+.cancel-button:hover span {
+  color: #1b1c1de8;
+}
+
+.cancel-button:active {
+  background-color: #3c3c3c;
+}
+
+/* LOADING ANIMATION SECTION */
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+    background-color: #606672;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+    background-color: #7f8696;
+  }
+
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+    background-color: #606672;
+  }
+}
+
+.loading-circle {
+  height: 2px;
+  width: 2px;
+  margin-right: 4px;
+  border-radius: 10px;
+  background-color: #606672;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.loading-circle:last-child {
+  margin-right: 0;
+}
+
+.loading-circle:nth-child(1) {
+  animation-delay: -0.3s;
+}
+
+.loading-circle:nth-child(2) {
+  animation-delay: -0.1s;
+}

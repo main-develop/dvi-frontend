@@ -16,7 +16,7 @@ export const DashboardTemplate = ({
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={transition}
+      variants={transition(0.4, 0.5)}
       className="flex h-screen"
     >
       <Sidebar></Sidebar>

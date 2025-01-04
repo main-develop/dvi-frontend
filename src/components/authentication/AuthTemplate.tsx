@@ -7,13 +7,13 @@ import { motion } from "framer-motion";
 import { transition } from "@/utils/motions";
 import logoImage from "@/shared/assets/images/logo1.png";
 
-interface AuthTemplateProps {
+type AuthTemplateProperties = {
   title: string;
   form: React.ReactNode;
   footerText: string;
   footerLinkText: string;
   footerLinkHref: string;
-}
+};
 
 export const AuthTemplate = ({
   title,
@@ -21,9 +21,14 @@ export const AuthTemplate = ({
   footerText,
   footerLinkText,
   footerLinkHref,
-}: AuthTemplateProps): React.JSX.Element => {
+}: AuthTemplateProperties): React.JSX.Element => {
   return (
-    <motion.div initial="hidden" animate="visible" variants={transition}>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={transition(0.4, 0.5)}
+      className="overscroll-none"
+    >
       <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="form-container-wrapper neon-lighting">
           <div className="form-container sm:w-[360px] p-6 sm:p-8 rounded-xl">

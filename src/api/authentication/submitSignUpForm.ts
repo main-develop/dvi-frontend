@@ -17,28 +17,18 @@ export async function submitSignUpForm(formData: signUpSchema) {
     });
 
     if (response.status === 201) {
-      console.log("Sign up successful:", formData);
-
-      return { success: true, status: response.status };
+      return { success: true, message: "" };
     } else {
-      const errorResponse = await response.json();
-      console.log(
-        `Sign up failed with status: ${response.status}. ${errorResponse.error}`
-      );
-
       return {
         success: false,
-        status: response.status,
-        error: errorResponse.error,
+        message: "This email address is already taken.",
       };
     }
   } catch (error) {
-    console.log("An error occurred:", error);
-
+    console.log(error);
     return {
       success: false,
-      status: null,
-      error: "Network error or server not reachable.",
+      message: "Network error or server not reachable.",
     };
   }
 }

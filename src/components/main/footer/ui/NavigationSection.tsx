@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-interface NavigationSectionProperties {
+type NavigationSectionProperties = {
   title: string;
   links: { name: string; href: string }[];
-}
+};
 
 export const NavigationSection = ({
   title,

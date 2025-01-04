@@ -1,18 +1,56 @@
-import { useState, useRef, useEffect } from "react";
-import Link from "next/link";
+"use client";
 
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useState, useRef, useEffect } from "react";
+import { DotLottie, DotLottieReact } from "@lottiefiles/dotlottie-react";
 import SearchIcon from "@/shared/assets/animations/search.json";
 import AccountIcon from "@/shared/assets/animations/account.json";
-import EditIcon from "@/shared/assets/animations/edit.json";
-import SettingsIcon from "@/shared/assets/animations/settings.json";
+import AppearanceIcon from "@/shared/assets/animations/appearance.json";
 import LogOutIcon from "@/shared/assets/animations/log-out.json";
 import { handleLogOut } from "@/api/authentication/handleLogOut";
 import { useRouter } from "next/navigation";
 import { getCookie } from "@/utils/getCookie";
+import { getUserPersonalInformation } from "@/api/fetch-user-data/getUserPersonalInformation";
+import { SectionNavigation } from "@/shared/components/navigation/SectionNavigation";
+
+const navigationSections = [
+  { name: "Account", icon: AccountIcon },
+  { name: "Appearance", icon: AppearanceIcon },
+];
 
 export const Navbar = (): React.JSX.Element => {
   const router = useRouter();
+
+  const [dotLottie, setDotLottie] = useState<DotLottie>();
+
+  const dotLottieRefCallback = (dotLottie: DotLottie) => {
+    setDotLottie(dotLottie);
+  };
+
+  const playIconAnimation = () => {
+    if (dotLottie) {
+      dotLottie.play();
+    }
+  };
+
+  const [personalInformation, setPersonalInformation] = useState<{
+    firstName: string;
+    lastName: string;
+    gender: string;
+    email: string;
+  }>();
+
+  useEffect(() => {
+    async function getData() {
+      const accessToken = getCookie("accessToken");
+
+      const response = await getUserPersonalInformation(accessToken);
+      if (response.success) {
+        setPersonalInformation(response.personalInformation);
+      }
+    }
+
+    getData();
+  }, []);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -39,6 +77,10 @@ export const Navbar = (): React.JSX.Element => {
     };
   }, [dropdownOpen]);
 
+  const navigateToSettings = (section: string) => {
+    router.push(`/dashboard/settings/${section.toLowerCase()}`);
+  };
+
   const logOut = async () => {
     const accessToken = getCookie("accessToken");
     const response = await handleLogOut(accessToken);
@@ -46,17 +88,20 @@ export const Navbar = (): React.JSX.Element => {
     if (response.success) {
       document.cookie = `accessToken=; path=/; Secure; SameSite=Strict; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
 
-      router.push("/authentication/log-in");
+      router.replace("/authentication/log-in");
     }
   };
 
   return (
     <div className="navbar h-[52px] border-b-[2px]">
       <div className="flex items-center justify-between py-2 px-2">
-        <div className="hidden md:flex bg-[#080808] items-center gap-2 px-2 rounded-full ring-[1.5px] ring-[#9ca3af]">
+        <div
+          onMouseEnter={playIconAnimation}
+          className="hidden md:flex bg-[#080808] items-center gap-2 px-2 rounded-full ring-[1.5px] ring-[#9ca3af]"
+        >
           <DotLottieReact
             data={SearchIcon}
-            playOnHover
+            dotLottieRefCallback={dotLottieRefCallback}
             className="w-[22px] h-[22px]"
           ></DotLottieReact>
           <input
@@ -75,7 +120,7 @@ export const Navbar = (): React.JSX.Element => {
           {dropdownOpen && (
             <div
               ref={dropdownRef}
-              className="flex flex-col absolute account-dropdown px-3 py-4 text-[#9ca3af] border w-[200px] rounded-md shadow-lg"
+              className="flex flex-col absolute account-dropdown px-3 py-4 text-[#9ca3af] border w-[215px] rounded-md shadow-lg"
             >
               <div className="flex space-x-4 items-center">
                 <div className="flex mr-auto items-center space-x-[4.5px]">
@@ -85,13 +130,22 @@ export const Navbar = (): React.JSX.Element => {
                     className="w-[35px] h-[35px] ml-[0.5px]"
                   ></DotLottieReact>
                   <div className="flex flex-col flex-1 truncate">
-                    <div className="relative font-medium text-gray-300">
+                    <div className="relative font-medium w-[146px] text-gray-300">
                       <span className="flex">
-                        <span className="relative truncate">Full Name</span>
+                        <span className="relative truncate">
+                          {personalInformation?.firstName ||
+                          personalInformation?.lastName
+                            ? (personalInformation.firstName || "") +
+                              " " +
+                              (personalInformation.lastName || "")
+                            : "You"}
+                        </span>
                       </span>
                     </div>
-                    <p className="font-normal text-sm text-gray-500 truncate">
-                      example@mail.com
+                    <p className="font-normal w-[146px] text-sm text-gray-500 truncate">
+                      {personalInformation
+                        ? personalInformation.email
+                        : "example@example.com"}
                     </p>
                   </div>
                 </div>
@@ -100,44 +154,30 @@ export const Navbar = (): React.JSX.Element => {
                 <div className="line" />
               </div>
               <nav className="grid gap-1 text-[#9ca3af] text-[15px]">
-                <Link
-                  href="#"
-                  className="relative flex items-center space-x-3 h-9 w-full focus:outline-none hover:bg-[#0e0e0e] hover:text-[#c1c9d6] rounded-md"
-                >
-                  <DotLottieReact
-                    data={EditIcon}
-                    playOnHover
-                    className="w-[20px] h-[20px] ml-2"
-                  ></DotLottieReact>
-                  <span>Edit profile</span>
-                </Link>
-                <Link
-                  href="#"
-                  className="relative flex items-center space-x-3 h-9 w-full focus:outline-none hover:bg-[#0e0e0e] hover:text-[#c1c9d6] rounded-md"
-                >
-                  <DotLottieReact
-                    data={SettingsIcon}
-                    playOnHover
-                    className="w-[20px] h-[20px] ml-2"
-                  ></DotLottieReact>
-                  <span>Settings</span>
-                </Link>
+                {navigationSections.map((section) => (
+                  <SectionNavigation
+                    key={section.name}
+                    onClick={() =>
+                      navigateToSettings(section.name.toLowerCase())
+                    }
+                    data={section.icon}
+                    section={section.name}
+                    buttonStyle="space-x-3 h-9 rounded-md"
+                    iconStyle="w-[20px] h-[20px] ml-2"
+                  ></SectionNavigation>
+                ))}
               </nav>
               <div className="flex items-center w-full h-1 py-2">
                 <div className="line" />
               </div>
               <nav className="gap-1 text-[#9ca3af] text-[15px]">
-                <button
+                <SectionNavigation
                   onClick={logOut}
-                  className="relative flex items-center space-x-3 h-9 w-full focus:outline-none hover:bg-[#0e0e0e] hover:text-[#c1c9d6] rounded-md"
-                >
-                  <DotLottieReact
-                    data={LogOutIcon}
-                    playOnHover
-                    className="w-[20px] h-[20px] ml-2"
-                  ></DotLottieReact>
-                  <span>Log out</span>
-                </button>
+                  data={LogOutIcon}
+                  section="Log out"
+                  buttonStyle="space-x-3 h-9 rounded-md"
+                  iconStyle="w-[20px] h-[20px] ml-2"
+                ></SectionNavigation>
               </nav>
             </div>
           )}

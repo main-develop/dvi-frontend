@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
   SignUpSchema,
@@ -36,26 +36,20 @@ export const SignUpForm = (): React.JSX.Element => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = form;
 
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
-  const emailValue = watch("email");
-  useEffect(() => {
-    if (errorMessage) {
-      setErrorMessage(null);
-    }
-  }, [emailValue, errorMessage]);
-
   const onSubmit: SubmitHandler<signUpSchema> = async (data) => {
+    setErrorMessage(null);
+
     const response = await submitSignUpForm(data);
 
     if (response.success) {
       router.push("/authentication/log-in");
     } else {
-      setErrorMessage(response.error);
+      setErrorMessage(response.message);
     }
   };
 

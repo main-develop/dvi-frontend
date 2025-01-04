@@ -4,7 +4,7 @@ import { submitLogInForm } from "@/api/authentication/submitLogInForm";
 import { LogInSchema, logInSchema } from "@/types/authentication/logInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export const LogInForm = () => {
@@ -22,29 +22,22 @@ export const LogInForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = form;
 
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
-  const emailValue = watch("email");
-  const passwordValue = watch("password");
-  useEffect(() => {
-    if (errorMessage) {
-      setErrorMessage(null);
-    }
-  }, [emailValue, passwordValue, errorMessage]);
-
   const onSubmit: SubmitHandler<logInSchema> = async (data) => {
+    setErrorMessage(null);
+
     const response = await submitLogInForm(data);
 
     if (response.success && response.accessToken) {
       document.cookie = `accessToken=${response.accessToken}; path=/; Secure; SameSite=Strict${response.expires ? `; Expires=${response.expires}` : ""}`;
 
-      router.push("/dashboard");
+      router.replace("/dashboard");
     } else {
-      setErrorMessage(response.error);
+      setErrorMessage(response.message);
     }
   };
 
