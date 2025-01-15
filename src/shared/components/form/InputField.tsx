@@ -1,5 +1,4 @@
 import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
-import { Message } from "./FormComponent";
 import { useEffect } from "react";
 
 type InputFieldProperties<TFieldValues extends FieldValues> = {
@@ -8,7 +7,7 @@ type InputFieldProperties<TFieldValues extends FieldValues> = {
   id: Path<TFieldValues>;
   label: string;
   defaultValue?: PathValue<TFieldValues, Path<TFieldValues>>;
-  message?: Message;
+  message?: string;
   className?: string;
 };
 
@@ -30,10 +29,12 @@ export const InputField = <TFieldValues extends FieldValues>({
   message,
   className,
 }: InputFieldProperties<TFieldValues>): React.JSX.Element => {
-  const fieldError = form.formState.errors[id];
+  const errorMessage =
+    form.formState.errors[id]?.message ||
+    (message === getMessage(id) ? message : null);
 
   useEffect(() => {
-    if (defaultValue !== undefined) {
+    if (defaultValue !== undefined && form.watch(id) !== defaultValue) {
       form.setValue(id, defaultValue);
     }
   }, [defaultValue, form, id]);
@@ -44,17 +45,15 @@ export const InputField = <TFieldValues extends FieldValues>({
         {...form.register(id)}
         type={type}
         id={id}
-        className={`${form.watch(id) ? "filled" : ""} ${className ? className : "border border-solid rounded-md outline-none w-[260px]"}`}
+        className={`border border-solid rounded-md outline-none ${form.watch(id) ? "filled" : ""} ${className ? className : ""}`}
       />
-      {fieldError ? (
-        <p className="text-[13px] text-red-800 w-[136px] sm:w-[100%]">
-          {fieldError.message as string}
+      {errorMessage && (
+        <p
+          className={`text-[13px] text-red-800 ${className?.includes("authentication") && id.includes("Name") ? "w-[140px]" : ""}`}
+        >
+          {errorMessage as string}
         </p>
-      ) : message?.message === getMessage(id as string) ? (
-        <p className="text-[13px] text-red-800 w-[136px] sm:w-[100%]">
-          {message.message}
-        </p>
-      ) : null}
+      )}
       <label htmlFor={id} className="select-none">
         {label}
       </label>

@@ -5,6 +5,7 @@ import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
 type GenderSelectProperties<TFieldValues extends FieldValues> = {
   form: UseFormReturn<TFieldValues>;
   defaultValue?: PathValue<TFieldValues, Path<TFieldValues>>;
+  className?: string;
 };
 
 const genderOptions = [
@@ -16,9 +17,9 @@ const genderOptions = [
 export const GenderSelect = <TFieldValues extends FieldValues>({
   form,
   defaultValue,
+  className,
 }: GenderSelectProperties<TFieldValues>): React.JSX.Element => {
   const [selectedOption, setSelectedOption] = useState("Gender");
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (defaultValue !== undefined) {
@@ -27,30 +28,21 @@ export const GenderSelect = <TFieldValues extends FieldValues>({
     }
   }, [defaultValue, form]);
 
-  const handleOptionSelect = (option: string) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-  };
-
   return (
-    <div className="relative select mt-4 items-center justify-between w-[260px] cursor-pointer">
-      <div className="selected flex justify-between items-center relative h-11 border border-solid rounded-md outline-none">
-        {selectedOption === "Gender" ? (
-          <label className="overflow-clip text-sm text-[#62666e] select-none">
-            {selectedOption}
-          </label>
-        ) : (
-          <label className="overflow-clip text-sm select-none">
-            {selectedOption}
-          </label>
-        )}
-        <ArrowIcon
-          className={`relative arrow ${isOpen ? "rotate-0" : "-rotate-90"}`}
-        ></ArrowIcon>
+    <div
+      className={`relative items-center justify-between gender-select cursor-pointer ${className ? className : ""}`}
+    >
+      <div className="relative flex items-center justify-between selected border border-solid rounded-md outline-none">
+        <label
+          className={`overflow-clip select-none cursor-pointer ${selectedOption === "Gender" ? "text-[#62666e]" : ""}`}
+        >
+          {selectedOption}
+        </label>
+        <ArrowIcon className="relative arrow"></ArrowIcon>
       </div>
-      <div className="options absolute z-10 flex flex-col border border-solid rounded-md outline-none overflow-hidden opacity-0 w-[100%]">
+      <div className="absolute flex flex-col overflow-hidden w-[100%] z-10 options opacity-0 border border-solid rounded-md outline-none">
         {genderOptions.map((option) => (
-          <div key={option.id} onClick={() => handleOptionSelect(option.value)}>
+          <div key={option.id} onClick={() => setSelectedOption(option.value)}>
             <input
               {...form.register("gender" as Path<TFieldValues>)}
               type="radio"
@@ -59,7 +51,7 @@ export const GenderSelect = <TFieldValues extends FieldValues>({
               className="hidden"
             />
             <label
-              className="option inline-block cursor-pointer p-[5px] w-[100%] select-none"
+              className="inline-block w-[100%] p-[5px] option select-none cursor-pointer"
               htmlFor={option.id}
             >
               {option.value}

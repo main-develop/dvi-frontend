@@ -24,3 +24,16 @@ export const ChangePasswordSchema = zod.object({
 });
 
 export type changePasswordSchema = zod.infer<typeof ChangePasswordSchema>;
+
+export const changePasswordFields: Array<{
+  id: keyof changePasswordSchema;
+  type: string;
+  label: string;
+}> = [
+  { id: "newPassword", type: "password", label: "New password" },
+  {
+    id: "oldPassword",
+    type: "password",
+    label: "Confirm with the current password",
+  },
+];

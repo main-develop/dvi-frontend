@@ -52,3 +52,21 @@ export const SignUpSchema = zod
   });
 
 export type signUpSchema = zod.infer<typeof SignUpSchema>;
+
+export const optionalInputFields: Array<{
+  id: keyof signUpSchema;
+  label: string;
+}> = [
+  { id: "firstName", label: "First name" },
+  { id: "lastName", label: "Last name" },
+];
+
+export const mainInputFields: Array<{
+  type: string;
+  id: keyof signUpSchema;
+  label: string;
+}> = [
+  { type: "text", id: "email", label: "Email address" },
+  { type: "password", id: "password", label: "Password" },
+  { type: "password", id: "confirmPassword", label: "Confirm password" },
+];

@@ -6,7 +6,6 @@ import { transition } from "@/utils/motions";
 import { Sidebar } from "./sidebar/Sidebar";
 import { Navbar } from "./navbar/Navbar";
 
-// TODO: Create Logo interface
 // TODO: Make correct display of ALL PAGES on md devices
 
 export const DashboardTemplate = ({

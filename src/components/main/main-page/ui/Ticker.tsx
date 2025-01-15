@@ -1,7 +1,7 @@
 "use client";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
-
 import areaChart from "@/shared/assets/charts/area-chart.png";
 import barChart from "@/shared/assets/charts/bar-chart.png";
 import clusteredBar from "@/shared/assets/charts/clustered-bar.png";
@@ -15,17 +15,17 @@ import scatterGraph from "@/shared/assets/charts/scatter-graph.png";
 import histogram from "@/shared/assets/charts/histogram.png";
 
 const charts = [
-  { key: 1, src: areaChart, alt: "area-chart" },
-  { key: 2, src: barChart, alt: "bar-chart" },
-  { key: 3, src: lineChart, alt: "line-chart" },
-  { key: 4, src: clusteredBar, alt: "clustered-bar" },
-  { key: 5, src: mapTree, alt: "map-tree" },
-  { key: 6, src: graph, alt: "graph" },
-  { key: 7, src: pieChart, alt: "pie-chart" },
-  { key: 8, src: columnLine, alt: "column-line" },
-  { key: 9, src: scatterGraph, alt: "scatter-graph" },
-  { key: 10, src: gantt, alt: "gantt" },
-  { key: 11, src: histogram, alt: "histogram" },
+  { src: areaChart, alt: "area-chart" },
+  { src: barChart, alt: "bar-chart" },
+  { src: lineChart, alt: "line-chart" },
+  { src: clusteredBar, alt: "clustered-bar" },
+  { src: mapTree, alt: "map-tree" },
+  { src: graph, alt: "graph" },
+  { src: pieChart, alt: "pie-chart" },
+  { src: columnLine, alt: "column-line" },
+  { src: scatterGraph, alt: "scatter-graph" },
+  { src: gantt, alt: "gantt" },
+  { src: histogram, alt: "histogram" },
 ];
 
 export const Ticker = (): React.JSX.Element => {
@@ -35,29 +35,23 @@ export const Ticker = (): React.JSX.Element => {
         <h2 className="text-xl text-center text-white/70">
           Supports various charts and graphs for data visualization
         </h2>
-        <div className="relative ticker-transition mt-9 flex overflow-hidden">
+        <div className="relative flex overflow-hidden mt-9 ticker-transition">
           <motion.div
             initial={{ translateX: 0 }}
             animate={{ translateX: "-50%" }}
             transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-            className="flex flex-none gap-20 pr-20 sm:gap-24 sm:pr-24"
+            className="flex flex-none pr-20 sm:pr-24 gap-20 sm:gap-24"
           >
-            {(() => {
-              const images = [];
-              for (let i = 0; i < 4; i++) {
-                images.push(
-                  ...charts.map(({ key, src, alt }) => (
-                    <Image
-                      key={`${key}-${i}`}
-                      src={src}
-                      alt={alt}
-                      className="h-9 w-auto flex-none"
-                    />
-                  ))
-                );
-              }
-              return images;
-            })()}
+            {Array.from({ length: 4 }).flatMap((_, i) =>
+              charts.map(({ src, alt }) => (
+                <Image
+                  key={`${i}-${alt}`}
+                  src={src}
+                  alt={alt}
+                  className="flex-none h-9 w-auto select-none"
+                />
+              ))
+            )}
           </motion.div>
         </div>
       </div>

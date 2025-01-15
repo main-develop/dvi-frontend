@@ -2,14 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.settings-page {
-  background-color: #131516;
+:root {
+  --submit-button-outline: #003d5c;
+  --submit-button-background: #00283c84;
+  --delete-account-button-border: #af0505;
+  --delete-account-button-background: #5b01015f;
 }
 
-.line {
-  height: 0.8px;
-  flex: 1 1 0%;
-  background-color: #ffffff33;
+/* SETTINGS PAGE SECTION */
+
+.settings-page {
+  background-color: #131516;
 }
 
 /* SIDEBAR SECTION */
@@ -18,12 +21,11 @@
   border-color: #ffffff33;
 }
 
+/* PREVIOUS PAGE SECTION */
+
 .previous-page {
-  border: solid 2px;
-  border-color: #9ca3afa3;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 500ms;
+  @apply [transition-property:all] ease-in-out duration-500;
+  border: solid 2px #9ca3afa3;
 }
 
 .previous-page:hover {
@@ -35,122 +37,48 @@
   background-color: #000000;
 }
 
-/* INPUT SECTION */
+/* SETTINGS SECTION NAVIGATION SECTION */
 
-.input-group label {
-  color: #62666e;
+.settings-section-navigation {
+  @apply h-11 rounded-lg justify-center;
 }
 
-.input-group input {
-  background-color: #131516;
-  border-color: #374151;
-  color: #9ca3af;
-  padding: 0.75rem 1rem;
+@media (min-width: 640px) {
+  .settings-section-navigation {
+    justify-content: normal;
+  }
 }
 
-.input-group input:focus {
-  border-color: #00406c;
+.settings-section-navigation span {
+  display: none;
 }
 
-.form-group {
-  position: relative;
+@media (min-width: 1024px) {
+  .settings-section-navigation span {
+    display: block;
+  }
 }
 
-.form-group label {
-  justify-content: center;
-  position: absolute;
-  top: 12.5px;
-  left: 16.5px;
-  pointer-events: none;
-  transition: 0.5s;
+.settings-section-navigation .settings-section-navigation-icon {
+  @apply h-[25px] w-[25px];
 }
 
-.form-group input:focus ~ label,
-.form-group input.filled ~ label {
-  top: -10px;
-  left: 8px;
-  background: #131516;
-  height: min-content;
-  padding: 0 5px;
-  font-size: 13px;
-}
-
-.form-group input:focus ~ label {
-  color: #00406c;
-}
-
-.form-group input.filled:not(:focus) ~ label {
-  color: #374151;
-}
-
-/* SELECT SECTION */
-
-.select:hover .options {
-  max-height: 150px;
-  opacity: 1;
-  visibility: visible;
-}
-
-.select:hover .arrow {
-  transform: rotate(0deg);
-}
-
-.select:hover .selected {
-  border-color: #00406c;
-}
-
-.selected {
-  color: #9ca3af;
-  font-size: 15px;
-  border-color: #374151;
-  background-color: #131516;
-  padding: 0.85em 1em;
-  z-index: 10;
-}
-
-.arrow {
-  fill: #9ca3af;
-  transform: rotate(-90deg);
-  z-index: 100000;
-  transition: 300ms;
-}
-
-.options {
-  top: 100%;
-  left: 0;
-  border-color: #374151;
-  background-color: #131516;
-  max-height: 0;
-  transition:
-    max-height 300ms ease,
-    opacity 300ms ease,
-    visibility 300ms ease;
-  visibility: hidden;
-}
-
-.option {
-  color: #9ca3af;
-  font-size: 15px;
-  background-color: #131516;
-  transition: background-color 500ms;
-}
-
-.option:hover {
-  background-color: #0e0e0e;
+@media (min-width: 640px) {
+  .settings-section-navigation-icon {
+    margin-left: 12px;
+  }
 }
 
 /* SUBMIT BUTTON SECTION */
 
 .submit-button {
-  outline: 2px solid #003d5c;
-  background-color: #00283c84;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 500ms;
+  @apply [transition-property:all] ease-in-out duration-500;
+  outline: solid 2px var(--submit-button-outline);
+  background-color: var(--submit-button-background);
 }
 
 .submit-button:hover {
-  outline: 2px solid #004365;
+  outline: solid 2px #004365;
   background-color: #00375384;
 }
 
@@ -162,20 +90,25 @@
   background-color: #001722;
 }
 
+.submit-button:disabled {
+  opacity: 0.7;
+}
+
+.submit-button:disabled:hover {
+  outline: solid 2px var(--submit-button-outline);
+  background-color: var(--submit-button-background);
+}
+
 /* DELETE BUTTON SECTION */
 
 .delete-account-button {
-  border: solid 2px;
-  border-color: #af0505;
-  background-color: #5b01015f;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 500ms;
+  @apply [transition-property:all] ease-in-out duration-500;
+  border: solid 2px var(--delete-account-button-border);
+  background-color: var(--delete-account-button-background);
 }
 
 .delete-account-button:hover {
-  border: solid 2px;
-  border-color: #9b0404;
+  border: solid 2px #9b0404;
   background-color: #6401018e;
 }
 
@@ -187,20 +120,29 @@
   background-color: #580808;
 }
 
+.delete-account-button:disabled {
+  opacity: 0.5;
+}
+
+.delete-account-button:disabled:hover {
+  border-color: var(--delete-account-button-border);
+  background-color: var(--delete-account-button-background);
+}
+
+.delete-account-button:disabled:hover span {
+  color: #db0b0b;
+}
+
 /* CANCEL BUTTON SECTION */
 
 .cancel-button {
-  border: solid 2px;
-  border-color: #949698a6;
+  @apply [transition-property:all] ease-in-out duration-500;
+  border: solid 2px #949698a6;
   background-color: #b2b4b64f;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 500ms;
 }
 
 .cancel-button:hover {
-  border: solid 2px;
-  border-color: #82868b;
+  border: solid 2px #82868b;
   background-color: #94969890;
 }
 
@@ -210,47 +152,4 @@
 
 .cancel-button:active {
   background-color: #3c3c3c;
-}
-
-/* LOADING ANIMATION SECTION */
-
-@keyframes pulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.5;
-    background-color: #606672;
-  }
-
-  50% {
-    transform: scale(1.2);
-    opacity: 1;
-    background-color: #7f8696;
-  }
-
-  100% {
-    transform: scale(0.8);
-    opacity: 0.5;
-    background-color: #606672;
-  }
-}
-
-.loading-circle {
-  height: 2px;
-  width: 2px;
-  margin-right: 4px;
-  border-radius: 10px;
-  background-color: #606672;
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
-.loading-circle:last-child {
-  margin-right: 0;
-}
-
-.loading-circle:nth-child(1) {
-  animation-delay: -0.3s;
-}
-
-.loading-circle:nth-child(2) {
-  animation-delay: -0.1s;
 }

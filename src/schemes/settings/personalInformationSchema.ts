@@ -25,3 +25,12 @@ export const PersonalInformationSchema = zod.object({
 export type personalInformationSchema = zod.infer<
   typeof PersonalInformationSchema
 >;
+
+export const personalInformationFields: Array<{
+  id: keyof personalInformationSchema;
+  type: string;
+  label: string;
+}> = [
+  { id: "firstName", type: "text", label: "First name" },
+  { id: "lastName", type: "text", label: "Last name" },
+];

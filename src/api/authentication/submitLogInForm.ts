@@ -1,43 +1,22 @@
 "use server";
 
-import { logInSchema } from "@/types/authentication/logInSchema";
+import { logInSchema } from "@/schemes/authentication/logInSchema";
+import { makeApiRequest } from "../makeApiRequest";
 
 export async function submitLogInForm(formData: logInSchema) {
-  try {
-    const response = await fetch(`${process.env.API_LOGIN_URL}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
-        rememberMe: formData.rememberMe,
-      }),
-    });
-
-    if (response.status === 200) {
-      const responseToken = await response.json();
+  return makeApiRequest<{ accessToken: string }>(
+    `${process.env.API_LOGIN_URL}`,
+    "POST",
+    formData
+  ).then((result) => {
+    if (result.success && result.data?.accessToken) {
       const expires = formData.rememberMe
         ? new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toUTCString()
-        : null;
+        : undefined;
 
-      return {
-        success: true,
-        message: "",
-        accessToken: responseToken.accessToken,
-        expires: expires,
-      };
-    } else {
-      return {
-        success: false,
-        message: "Invalid email or password.",
-      };
+      return { ...result, expires };
     }
-  } catch (error) {
-    console.log(error);
 
-    return {
-      success: false,
-      message: "Network error or server not reachable.",
-    };
-  }
+    return result;
+  });
 }

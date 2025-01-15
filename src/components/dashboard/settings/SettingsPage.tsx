@@ -1,6 +1,7 @@
 "use client";
 
 import "./settings.css";
+import "@/shared/styles/form-components.css";
 import { Sidebar } from "./ui/Sidebar";
 import { AccountSection } from "./ui/sections/AccountSection";
 import { AppearanceSection } from "./ui/sections/AppearanceSection";
@@ -15,7 +16,7 @@ export const SettingsPage = ({
   return (
     <>
       <Sidebar activeSection={`${section}`}></Sidebar>
-      <div className="overflow-x-hidden overscroll-none w-[82%]">
+      <div className="w-[82%] overflow-x-hidden overscroll-none">
         {section === "account" && <AccountSection />}
         {section === "appearance" && <AppearanceSection />}
       </div>

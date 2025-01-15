@@ -9,3 +9,16 @@ export const ChangeEmailSchema = zod.object({
 });
 
 export type changeEmailSchema = zod.infer<typeof ChangeEmailSchema>;
+
+export const changeEmailFields: Array<{
+  id: keyof changeEmailSchema;
+  type: string;
+  label: string;
+}> = [
+  { id: "email", type: "text", label: "New email" },
+  {
+    id: "password",
+    type: "password",
+    label: "Confirm with the current password",
+  },
+];

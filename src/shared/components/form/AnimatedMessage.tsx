@@ -3,42 +3,41 @@ import { transition } from "@/utils/motions";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import SuccessIcon from "@/shared/assets/animations/success.json";
 import FailIcon from "@/shared/assets/animations/fail.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type AnimatedMessageProperties = {
   message: string;
   success: boolean;
-  section?: string;
+  className?: string;
 };
 
 export const AnimatedMessage = ({
   message,
   success,
-  section,
+  className,
 }: AnimatedMessageProperties): React.JSX.Element => {
   const [messageAnimation, setMessageAnimation] = useState("visible");
 
-  setTimeout(() => {
-    setMessageAnimation("fadeOut");
-  }, 1000);
+  useEffect(() => {
+    const timer = setTimeout(() => setMessageAnimation("fadeOut"), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <motion.div
       initial="hidden"
       animate={messageAnimation}
       variants={transition(0, 0.2, 0, 4)}
-      className={`${section === "deleteAccount" ? "px-4 sm:px-6" : ""}`}
+      className={`animated-message-wrapper ${className ? className : ""}`}
     >
-      <div
-        className={`flex flex-row items-center ${section !== "deleteAccount" ? "mt-2 sm:mt-7 sm:ml-9" : ""}`}
-      >
+      <div className="flex flex-row items-center mt-2 sm:mt-7 sm:ml-9">
         <DotLottieReact
           data={success ? SuccessIcon : FailIcon}
           autoplay={true}
-          className={`w-[25px] h-[25px] ${section !== "deleteAccount" ? "w-[33px] h-[33px] sm:w-[25px] sm:h-[25px]" : ""}`}
+          className={`h-[33px] sm:h-[25px] w-[33px] sm:w-[25px] ${className ? className + "-icon" : ""}`}
         ></DotLottieReact>
         <span
-          className={`ml-1 text-sm pointer-events-none select-none ${success ? "text-green-600" : "text-red-800"}`}
+          className={`ml-1 text-sm select-none pointer-events-none ${success ? "text-green-600" : "text-red-800"}`}
         >
           {message}
         </span>

@@ -3,18 +3,27 @@ import { useState } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 import zod from "zod";
 
-export type Message = {
+export type Response = {
   message: string;
   success: boolean;
+  type:
+    | "validationError"
+    | "serverError"
+    | "unexpectedError"
+    | "successResponse";
+  data?: Record<string, unknown>;
+  user?: Record<string, unknown>;
+  expires?: string | undefined;
 };
 
 type FormComponentProperties<TSchema extends zod.ZodTypeAny> = {
   schema: TSchema;
   defaultValues: zod.infer<TSchema>;
-  onSubmit: (data: zod.infer<TSchema>) => Promise<Message>;
+  onSubmit: (data: zod.infer<TSchema>) => Promise<Response>;
   children: (
     form: UseFormReturn<zod.infer<TSchema>>,
-    message: Message | undefined
+    response: Response | undefined,
+    isLoading: boolean
   ) => React.ReactNode;
   formName?: string;
 };
@@ -26,7 +35,8 @@ export const FormComponent = <TSchema extends zod.ZodTypeAny>({
   children,
   formName,
 }: FormComponentProperties<TSchema>): React.JSX.Element => {
-  const [message, setMessage] = useState<Message | undefined>(undefined);
+  const [response, setResponse] = useState<Response | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<zod.infer<TSchema>>({
     resolver: zodResolver(schema),
@@ -34,7 +44,8 @@ export const FormComponent = <TSchema extends zod.ZodTypeAny>({
   });
 
   const handleSubmit = async (data: zod.infer<TSchema>) => {
-    setMessage(undefined);
+    setResponse(undefined);
+    setIsLoading(true);
 
     const response = await onSubmit(data);
 
@@ -42,12 +53,13 @@ export const FormComponent = <TSchema extends zod.ZodTypeAny>({
       form.reset();
     }
 
-    setMessage(response);
+    setResponse(response);
+    setIsLoading(false);
   };
 
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)}>
-      {children(form, message)}
+      {children(form, response, isLoading)}
     </form>
   );
 };

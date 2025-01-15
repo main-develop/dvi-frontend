@@ -1,12 +1,12 @@
 "use client";
 
-import "./home.css";
+import "./main-page.css";
 import { motion } from "framer-motion";
 import { transition } from "@/utils/motions";
-import { Overview } from "@/components/main/home-page/ui/Overview";
-import { Ticker } from "@/components/main/home-page/ui/Ticker";
+import { Overview } from "@/components/main/main-page/ui/Overview";
+import { Ticker } from "@/components/main/main-page/ui/Ticker";
 
-export const HomePage = (): React.JSX.Element => {
+export const MainPage = (): React.JSX.Element => {
   return (
     <motion.div
       initial="hidden"

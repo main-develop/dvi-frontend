@@ -1,35 +1,35 @@
 "use client";
 
 import {
-  MotionValue,
   ValueAnimationTransition,
   animate,
   motion,
   useMotionTemplate,
   useMotionValue,
 } from "framer-motion";
-import { RefObject, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-export const LoginButton = (): React.JSX.Element => {
+export const LogInButton = (): React.JSX.Element => {
   const router = useRouter();
 
   const handleLoginRedirect = () => {
     router.push("/authentication/log-in");
   };
 
-  const xPosition: MotionValue<number> = useMotionValue(0);
-  const yPosition: MotionValue<number> = useMotionValue(0);
-  const maskImage: MotionValue<string> = useMotionTemplate`radial-gradient(150px 150px at ${xPosition}% ${yPosition}%, black, transparent)`;
-  const divRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const xPosition = useMotionValue(0);
+  const yPosition = useMotionValue(0);
+
+  const maskImage = useMotionTemplate`radial-gradient(150px 150px at ${xPosition}% ${yPosition}%, black, transparent)`;
+  const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!divRef.current) return;
 
     const { height, width } = divRef.current?.getBoundingClientRect();
-    const circumference: number = height * 2 + width * 2;
+    const circumference = height * 2 + width * 2;
 
-    const times: number[] = [
+    const times = [
       0,
       width / circumference,
       (width + height) / circumference,
@@ -53,16 +53,18 @@ export const LoginButton = (): React.JSX.Element => {
     <motion.div
       ref={divRef}
       style={{ maskImage: maskImage }}
-      className="inset-0 -m-px border border-[#00406C] login-button rounded-lg"
+      className="inset-0 -m-px log-in-button-wrapper"
     >
       <button
         onClick={handleLoginRedirect}
-        className="text-white/90 rounded-lg border login-button"
+        className="text-white/90 log-in-button"
       >
-        <span className="absolute inset-0 rounded-xl p-[2px] group-hover:opacity-100"></span>
-        <span className="relative z-10 block py-2 px-4 rounded-xl">
-          <div className="relative z-10 flex items-center space-x-2">
-            <span className="transition-all duration-500">Log in</span>
+        <span className="absolute inset-0 p-[2px] rounded-xl group-hover:opacity-100"></span>
+        <span className="relative px-4 py-2 z-10 block rounded-xl">
+          <div className="relative flex items-center z-10 space-x-2">
+            <span className="select-none transition-all duration-500">
+              Log in
+            </span>
           </div>
         </span>
       </button>

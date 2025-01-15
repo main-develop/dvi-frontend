@@ -12,7 +12,7 @@ export const SectionWrapper = ({
   return (
     <div className="px-7">
       <h2 className="text-lg text-[#9ca3af]">{title}</h2>
-      <p className="text-[15px] text-[#9ca3afc5] mt-1">{description}</p>
+      <p className="mt-1 text-[15px] text-[#9ca3afc5]">{description}</p>
       {children}
     </div>
   );

@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ticker-transition-left: #000000;
+  --ticker-transition-right: #00000000;
+}
+
+/* START FOR FREE BUTTON SECTION */
+
+.start-for-free-button {
+  background-color: #1f2937;
+  transition: transform 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  75% {
+    opacity: 0.75;
+  }
+}
+
+.start-for-free-button:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  box-shadow: 0 4px 6px #450cafe6;
+}
+
+.start-for-free-button:active {
+  transform: scale(0.95);
+}
+
+/* GRADIENT SPAN SECTION */
+
+.gradient-span {
+  @apply opacity-0 [transition:opacity_1.5s_ease];
+  background: linear-gradient(to right, #38b2ac, #4299e1, #9f7aea);
+}
+
+/* TICKER TRANSITION SECTION */
+
+.ticker-transition::before,
+.ticker-transition::after {
+  @apply absolute h-full w-[5px] top-0 z-10 content-[""];
+}
+
+.ticker-transition::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--ticker-transition-left),
+    var(--ticker-transition-right)
+  );
+}
+
+.ticker-transition::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--ticker-transition-left),
+    var(--ticker-transition-right)
+  );
+}

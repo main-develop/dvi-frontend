@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background-color: #131516;
+  --border-color: #ffffff33;
+}
+
 /* .glassmorphism {
   background-color: rgba(128, 128, 128, 0.2);
   background-clip: padding-box;
@@ -14,25 +19,39 @@
   background-position: center;
 } */
 
+/* SIDEBAR SECTION */
+
 .sidebar {
-  background-color: #131516;
-  border-color: #ffffff33;
+  background-color: var(--background-color);
+  border-color: var(--border-color);
 }
+
+/* NAVBAR SECTION */
 
 .navbar {
-  background-color: #131516;
-  border-color: #ffffff33;
+  background-color: var(--background-color);
+  border-color: var(--border-color);
 }
+
+.navbar-section-navigation {
+  @apply h-9 rounded-md space-x-3;
+}
+
+.navbar-section-navigation .navbar-section-navigation-icon {
+  @apply h-5 w-5 ml-2;
+}
+
+/* ACCOUNT DROPDOWN SECTION */
 
 .account-dropdown {
-  top: 50px;
-  right: 0px;
-  background-color: #131516;
-  border-color: #ffffff33;
+  @apply top-[50px] right-0;
+  background-color: var(--background-color);
+  border-color: var(--border-color);
 }
 
+/* LINE SECTION */
+
 .line {
-  height: 0.8px;
-  flex: 1 1 0%;
+  @apply flex-1 h-[0.8px];
   background-color: #374151;
 }

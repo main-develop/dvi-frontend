@@ -6,8 +6,7 @@ type SectionNavigationProperties = {
   data: Data | undefined;
   section: string;
   isActive?: boolean;
-  buttonStyle?: string;
-  iconStyle?: string;
+  className?: string;
 };
 
 export const SectionNavigation = ({
@@ -15,8 +14,7 @@ export const SectionNavigation = ({
   data,
   section,
   isActive,
-  buttonStyle,
-  iconStyle,
+  className,
 }: SectionNavigationProperties): React.JSX.Element => {
   const [dotLottie, setDotLottie] = useState<DotLottie>();
 
@@ -34,22 +32,16 @@ export const SectionNavigation = ({
     <button
       onClick={onClick}
       onMouseEnter={playIconAnimation}
-      className={`relative flex flex-row items-center w-full transition-all duration-500 
-        ${buttonStyle ? buttonStyle : "h-11 rounded-lg "} 
-        ${
-          isActive
-            ? "bg-[#0b0b0bcf] text-[#9ca3afc5]"
-            : "hover:bg-[#0e0e0ed2] text-[#9ca3af] hover:text-[#c1c9d6] active:bg-[#010101]"
-        }`}
+      className={`relative flex flex-row items-center w-full section-navigation transition-all duration-500  
+        ${className ? className : ""} 
+        ${isActive ? "active" : "not-active"}`}
     >
       <DotLottieReact
         data={data}
         dotLottieRefCallback={dotLottieRefCallback}
-        className={`${iconStyle ? iconStyle : "w-[25px] h-[25px] ml-3"}`}
+        className={className ? `${className}-icon` : undefined}
       ></DotLottieReact>
-      <span className="hidden lg:block ml-2 truncate select-none">
-        {section}
-      </span>
+      <span className="ml-2 truncate select-none">{section}</span>
     </button>
   );
 };

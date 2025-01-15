@@ -6,7 +6,7 @@ import clsx from "clsx";
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DVI",
+  title: "Dashboard",
 };
 
 export default function DashboardLayout({
