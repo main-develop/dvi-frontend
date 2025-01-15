@@ -1,134 +1,116 @@
 "use client";
 
 import { submitLogInForm } from "@/api/authentication/submitLogInForm";
-import { LogInSchema, logInSchema } from "@/types/authentication/logInSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Response,
+  FormComponent,
+} from "@/shared/components/form/FormComponent";
+import { InputField } from "@/shared/components/form/InputField";
+import {
+  logInFields,
+  LogInSchema,
+  logInSchema,
+} from "@/schemes/authentication/logInSchema";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { LoadingText } from "@/shared/components/other/LoadingText";
+import { AnimatedMessage } from "@/shared/components/form/AnimatedMessage";
 
 export const LogInForm = () => {
   const router = useRouter();
 
-  const form = useForm<logInSchema>({
-    resolver: zodResolver(LogInSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      rememberMe: false,
-    },
-  });
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = form;
-
-  const [errorMessage, setErrorMessage] = useState<null | string>(null);
-
-  const emailValue = watch("email");
-  const passwordValue = watch("password");
-  useEffect(() => {
-    if (errorMessage) {
-      setErrorMessage(null);
-    }
-  }, [emailValue, passwordValue, errorMessage]);
-
-  const onSubmit: SubmitHandler<logInSchema> = async (data) => {
-    const response = await submitLogInForm(data);
-
-    if (response.success && response.accessToken) {
-      document.cookie = `accessToken=${response.accessToken}; path=/; Secure; SameSite=Strict${response.expires ? `; Expires=${response.expires}` : ""}`;
-
-      router.push("/dashboard");
-    } else {
-      setErrorMessage(response.error);
-    }
+  const handleSuccessfulLogIn = (response: Response) => {
+    document.cookie = `accessToken=${response.data?.accessToken}; path=/; Secure; SameSite=Strict${response.expires ? `; Expires=${response.expires}` : ""}`;
+    router.replace("/dashboard");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
-      <div className="input-group my-1 text-sm">
-        <div className="form-group">
-          <input
-            {...register("email")}
-            type="text"
-            id="email"
-            onChange={(e) =>
-              e.target.classList.toggle("filled", e.target.value !== "")
-            }
-            className="border border-solid rounded-md outline-none w-[100%]"
-          />
-          <p className="text-[13px] text-red-800 w-[136px] sm:w-[100%]">
-            {errors.email && errors.email.message}
-          </p>
-          <label htmlFor="email">Email address</label>
-        </div>
-      </div>
-      <div className="input-group mb-1 mt-3 text-sm">
-        <div className="form-group">
-          <input
-            {...register("password")}
-            type="password"
-            id="password"
-            onChange={(e) =>
-              e.target.classList.toggle("filled", e.target.value !== "")
-            }
-            className="border border-solid rounded-md outline-none w-[100%]"
-          />
-          <p className="text-[13px] text-red-800 w-[136px] sm:w-[100%]">
-            {errors.password && errors.password.message}
-          </p>
-          <label htmlFor="password">Password</label>
-        </div>
-        <div className="flex flex-row justify-between mb-2 mt-[14px]">
-          <div className="flex flex-row">
-            <label className="cursor-pointer mb-[14px]">
-              <input
-                {...register("rememberMe")}
-                type="checkbox"
-                id="remember-me"
-                className="hidden"
-              />
-              <svg
-                viewBox="0 0 64 64"
-                height="14px"
-                width="14px"
-                className="overflow-visible"
-              >
-                <path
-                  d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
-                  pathLength="575.0541381835938"
-                  className="path"
-                ></path>
-              </svg>
-            </label>
-            <label className="text-[13px] pl-[6px] -mt-[2px]">
-              Remember me
-            </label>
-          </div>
-          <div className="-mt-[2.3px]">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="forgot-password text-[13px] hover:text-[#f3f4f6da] transition"
+    <FormComponent
+      schema={LogInSchema}
+      defaultValues={{ email: "", password: "", rememberMe: false }}
+      onSubmit={async (data) => submitLogInForm(data)}
+    >
+      {(form, response, isLoading) => {
+        if (response?.success && response.data?.accessToken)
+          handleSuccessfulLogIn(response);
+        return (
+          <div className="mt-6">
+            {logInFields.map((field) => (
+              <div key={field.id} className="mb-3">
+                <InputField<logInSchema>
+                  form={form}
+                  type={field.type}
+                  id={field.id}
+                  label={field.label}
+                  className="w-[100%] authentication-section-input-group"
+                ></InputField>
+              </div>
+            ))}
+            <div className="flex flex-row justify-between mt-[14px]">
+              <div className="flex flex-row">
+                <label className="mb-[14px] cursor-pointer">
+                  <input
+                    {...form.register("rememberMe")}
+                    type="checkbox"
+                    id="rememberMe"
+                    className="hidden"
+                  />
+                  <svg
+                    viewBox="0 0 64 64"
+                    height="14px"
+                    width="14px"
+                    className="overflow-visible"
+                  >
+                    <path
+                      d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                      pathLength="575.0541381835938"
+                      className="path"
+                    ></path>
+                  </svg>
+                </label>
+                <label className="pl-[6px] -mt-[2px] text-[13px]">
+                  Remember me
+                </label>
+              </div>
+              <div className="-mt-[5.3px]">
+                <a
+                  rel="noopener noreferrer"
+                  href="#"
+                  className="forgot-password text-[13px] hover:text-[#f3f4f6da] transition"
+                >
+                  Forgot password?
+                </a>
+              </div>
+            </div>
+            {response?.message && response.type === "serverError" && (
+              <AnimatedMessage
+                message={response.message}
+                success={response.success}
+                className="authentication-section"
+              ></AnimatedMessage>
+            )}
+            {response?.message &&
+              ["validationError", "unexpectedError"].includes(
+                response.type
+              ) && (
+                <p className="text-[13px] text-red-800">{response.message}</p>
+              )}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="flex items-center justify-center w-[100%] p-3 mt-8 log-in-button rounded-md"
             >
-              Forgot password?
-            </a>
+              <span className="flex items-center justify-center select-none font-medium transition-all duration-500">
+                <LoadingText
+                  isLoading={isLoading}
+                  primaryText="Log in"
+                  loadingText="Logging in"
+                  className="ml-[0.7px] sm:ml-[0.5px] w-[14px] authentication"
+                ></LoadingText>
+              </span>
+            </button>
           </div>
-        </div>
-      </div>
-      {errorMessage && (
-        <p className="text-[13px] text-red-800">{errorMessage}</p>
-      )}
-      <button
-        type="submit"
-        className="log-in-button block w-[100%] p-3 mt-8 text-center font-semibold border-none rounded-md"
-      >
-        Log in
-      </button>
-    </form>
+        );
+      }}
+    </FormComponent>
   );
 };

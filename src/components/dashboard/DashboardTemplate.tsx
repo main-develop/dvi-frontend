@@ -6,7 +6,6 @@ import { transition } from "@/utils/motions";
 import { Sidebar } from "./sidebar/Sidebar";
 import { Navbar } from "./navbar/Navbar";
 
-// TODO: Create Logo interface
 // TODO: Make correct display of ALL PAGES on md devices
 
 export const DashboardTemplate = ({
@@ -16,7 +15,7 @@ export const DashboardTemplate = ({
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={transition}
+      variants={transition(0.4, 0.5)}
       className="flex h-screen"
     >
       <Sidebar></Sidebar>

@@ -5,7 +5,7 @@ export const SignUpPage = (): React.JSX.Element => {
   return (
     <AuthTemplate
       title="Create an account"
-      form={<SignUpForm />}
+      formComponent={<SignUpForm />}
       footerText="Already have an account?"
       footerLinkText="Log in"
       footerLinkHref="/authentication/log-in"

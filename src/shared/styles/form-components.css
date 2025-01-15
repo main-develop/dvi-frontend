@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --text-color: #9ca3af;
+  --focused: #00406c;
+  --not-focused: #374151;
+  --authentication-section-background: #111827;
+  --settings-section-background: #131516;
+}
+
+/* FORM SECTION */
+
+.form-group {
+  position: relative;
+  font-size: 14px;
+}
+
+/* INPUT SECTION */
+
+.form-group input {
+  @apply px-4 py-3;
+  color: var(--text-color);
+  border-color: var(--not-focused);
+}
+
+.form-group input.authentication-section-input-group {
+  background-color: var(--authentication-section-background);
+}
+
+.form-group input.settings-section-input-group {
+  background-color: var(--settings-section-background);
+}
+
+.form-group input:focus {
+  border-color: var(--focused);
+}
+
+/* LABEL SECTION */
+
+.form-group label {
+  @apply absolute justify-center top-[12.5px] left-[16.5px] pointer-events-none [transition:0.5s];
+  color: #62666e;
+}
+
+.form-group input:focus ~ label,
+.form-group input.filled ~ label {
+  @apply h-min -top-[10px] left-2 rounded-[20px] px-[5px];
+  font-size: 13px;
+}
+
+.form-group input:focus.authentication-section-input-group ~ label,
+.form-group input.filled.authentication-section-input-group ~ label {
+  background: var(--authentication-section-background);
+}
+
+.form-group input:focus.settings-section-input-group ~ label,
+.form-group input.filled.settings-section-input-group ~ label {
+  background: var(--settings-section-background);
+}
+
+.form-group input:focus ~ label {
+  color: var(--focused);
+}
+
+.form-group input.filled:not(:focus) ~ label {
+  color: var(--not-focused);
+}
+
+/* GENDER SELECT SECTION */
+
+.gender-select:hover .options {
+  @apply visible max-h-[150px] opacity-100;
+}
+
+.gender-select:hover .arrow {
+  @apply rotate-0;
+}
+
+.gender-select:hover .selected {
+  border-color: var(--focused);
+}
+
+.selected {
+  @apply h-[46.6px] z-10 px-4 py-[13.6px];
+  color: var(--text-color);
+  border-color: var(--not-focused);
+  font-size: 14px;
+}
+
+.gender-select.authentication-section-gender-select .selected {
+  background-color: var(--authentication-section-background);
+}
+
+.gender-select.settings-section-gender-select .selected {
+  background-color: var(--settings-section-background);
+}
+
+.arrow {
+  @apply z-[100000] -rotate-90 [transition:300ms];
+  fill: var(--text-color);
+}
+
+.options {
+  @apply invisible max-h-0 top-full left-0 [transition:max-height_300ms_ease,_opacity_300ms_ease,_visibility_300ms_ease];
+  border-color: var(--not-focused);
+}
+
+.gender-select.authentication-section-gender-select .options {
+  background-color: var(--authentication-section-background);
+}
+
+.gender-select.settings-section-gender-select .options {
+  background-color: var(--settings-section-background);
+}
+
+.options .option {
+  color: var(--text-color);
+  font-size: 15px;
+  transition: background-color 500ms;
+}
+
+.gender-select.authentication-section-gender-select .option {
+  background-color: var(--authentication-section-background);
+}
+
+.gender-select.settings-section-gender-select .option {
+  background-color: var(--settings-section-background);
+}
+
+.gender-select.authentication-section-gender-select .option:hover {
+  background-color: #0b101f;
+}
+
+.gender-select.settings-section-gender-select .option:hover {
+  background-color: #0e0e0e;
+}
+
+/* ANIMATED MESSAGE SECTION */
+
+.animated-message-wrapper.delete-account-section {
+  @apply px-4 sm:px-6;
+}
+
+.animated-message-wrapper.authentication-section div,
+.animated-message-wrapper.delete-account-section div {
+  @apply mt-0 sm:mt-0 sm:ml-0;
+}
+
+.animated-message-wrapper.authentication-section .authentication-section-icon {
+  @apply h-[33px] w-[33px];
+}

@@ -1,14 +1,5 @@
-"use client";
+import { MainPage } from "@/components/main/main-page/MainPage";
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
-export default function HomeRedirect(): React.JSX.Element {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.push("/home");
-  }, [router]);
-
-  return <div></div>;
+export default function Main(): React.JSX.Element {
+  return <MainPage></MainPage>;
 }
