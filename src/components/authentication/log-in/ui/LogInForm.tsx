@@ -1,6 +1,6 @@
 "use client";
 
-import { submitLogInForm } from "@/api/authentication/submitLogInForm";
+import { submitLogInForm } from "@/api/authentication-requests/submitLogInForm";
 import {
   Response,
   FormComponent,
@@ -10,7 +10,7 @@ import {
   logInFields,
   LogInSchema,
   logInSchema,
-} from "@/schemes/authentication/logInSchema";
+} from "@/schemes/authentication-schemes/logInSchema";
 import { useRouter } from "next/navigation";
 import { LoadingText } from "@/shared/components/other/LoadingText";
 import { AnimatedMessage } from "@/shared/components/form/AnimatedMessage";
@@ -20,7 +20,7 @@ export const LogInForm = () => {
 
   const handleSuccessfulLogIn = (response: Response) => {
     document.cookie = `accessToken=${response.data?.accessToken}; path=/; Secure; SameSite=Strict${response.expires ? `; Expires=${response.expires}` : ""}`;
-    router.replace("/dashboard");
+    router.replace("/dashboard/home");
   };
 
   return (
@@ -97,7 +97,7 @@ export const LogInForm = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="flex items-center justify-center w-[100%] p-3 mt-8 log-in-button rounded-md"
+              className="flex items-center justify-center w-[100%] p-3 mt-8 authentication-log-in-button rounded-md"
             >
               <span className="flex items-center justify-center select-none font-medium transition-all duration-500">
                 <LoadingText

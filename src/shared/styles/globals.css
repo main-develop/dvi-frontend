@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 /* SEPARATION LINE SECTION */
+
 .separation-line {
   @apply flex-1 h-[0.8px];
 }
@@ -23,7 +24,7 @@
 }
 
 .section-navigation.not-active {
-  @apply hover:text-[#c1c9d6] hover:bg-[#0e0e0ed2] active:bg-[#010101];
+  @apply hover:text-[#c1c9d6] hover:bg-[#0e0e0e] active:bg-[#010101];
   color: #9ca3af;
 }
 

@@ -39,7 +39,7 @@ export const SectionNavigation = ({
       <DotLottieReact
         data={data}
         dotLottieRefCallback={dotLottieRefCallback}
-        className={className ? `${className}-icon` : undefined}
+        className={className ? `${className}-icon` : ""}
       ></DotLottieReact>
       <span className="ml-2 truncate select-none">{section}</span>
     </button>

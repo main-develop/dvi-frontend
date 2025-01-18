@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { transition } from "@/utils/motions";
 import { useEffect, useState } from "react";
 
-export default function SettingsLayout({
+export default function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const [wasAnimated, setWasAnimated] = useState(false);
@@ -20,7 +20,7 @@ export default function SettingsLayout({
       initial={wasAnimated ? "visible" : "hidden"}
       animate="visible"
       variants={transition(0.4, 0.5)}
-      className="flex h-screen w-screen bg-[#131516]"
+      className="flex h-screen w-screen"
     >
       {children}
     </motion.div>
