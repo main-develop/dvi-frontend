@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-color: #131516;
+  --border-color: #ffffff33;
+}
+
+/* .glassmorphism {
+  background-color: rgba(128, 128, 128, 0.2);
+  background-clip: padding-box;
+  backdrop-filter: blur(8px) saturate(100%) contrast(100%);
+}
+
+.dashboard {
+  background-image: url("/dashboard-background.jpg");
+  background-size: cover;
+  background-position: center;
+} */
+
+/* SIDEBAR SECTION */
+
+.sidebar {
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+}
+
+/* DASHBOARD SECTION NAVIGATION SECTION */
+
+.dashboard-section-navigation {
+  @apply h-11 rounded-lg justify-center;
+}
+
+@media (min-width: 640px) {
+  .dashboard-section-navigation {
+    justify-content: normal;
+  }
+}
+
+.dashboard-section-navigation span {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-section-navigation span {
+    display: block;
+  }
+}
+
+.dashboard-section-navigation .dashboard-section-navigation-icon {
+  @apply h-[25px] w-[25px];
+}
+
+@media (min-width: 640px) {
+  .dashboard-section-navigation-icon {
+    margin-left: 12px;
+  }
+}
+
+/* NAVBAR SECTION */
+
+.navbar {
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+}
+
+.navbar-section-navigation {
+  @apply h-9 rounded-md space-x-3;
+}
+
+.navbar-section-navigation .navbar-section-navigation-icon {
+  @apply h-5 w-5 ml-2;
+}
+
+/* ACCOUNT DROPDOWN SECTION */
+
+.account-dropdown {
+  @apply top-[50px] right-0;
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+}
+
+/* LINE SECTION */
+
+.line {
+  @apply flex-1 h-[0.8px];
+  background-color: #374151;
+}

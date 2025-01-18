@@ -5,8 +5,8 @@ import {
   optionalInputFields,
   SignUpSchema,
   signUpSchema,
-} from "@/schemes/authentication/signUpSchema";
-import { submitSignUpForm } from "@/api/authentication/submitSignUpForm";
+} from "@/schemes/authentication-schemes/signUpSchema";
+import { submitSignUpForm } from "@/api/authentication-requests/submitSignUpForm";
 import { GenderSelect } from "@/shared/components/form/GenderSelect";
 import { InputField } from "@/shared/components/form/InputField";
 import { FormComponent } from "@/shared/components/form/FormComponent";
@@ -82,7 +82,7 @@ export const SignUpForm = (): React.JSX.Element => {
             <button
               type="submit"
               disabled={isLoading}
-              className="flex items-center justify-center w-[100%] mt-8 p-3 sign-up-button rounded-md"
+              className="flex items-center justify-center w-[100%] mt-8 p-3 authentication-sign-up-button rounded-md"
             >
               <span className="flex items-center justify-center select-none font-medium transition-all duration-500">
                 <LoadingText

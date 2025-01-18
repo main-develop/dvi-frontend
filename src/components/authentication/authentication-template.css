@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --form-container-background: #111827;
+  --text-color: #9ca3af;
+  --shadow: #00406c;
+  --button-outline: #003d5c;
+  --button-state-background: #002131;
+}
+
+.form-container {
+  background-color: var(--form-container-background);
+  color: var(--text-color);
+}
+
+.forgot-password {
+  color: var(--text-color);
+}
+
+/* BACKGROUND GLOW EFFECT SECTION */
+
+.form-container-wrapper {
+  position: relative;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.form-container-wrapper::before {
+  @apply absolute top-0 bottom-0 left-0 right-0 -z-[1] rounded-xl content-[""];
+  background-color: var(--form-container-background);
+  box-shadow: var(--shadow) 0px 0px 100px -10px;
+  outline: 1px solid #003a61;
+  animation: pulse 5s ease-in-out infinite;
+}
+
+.neon-lighting {
+  position: relative;
+}
+
+.neon-lighting::after {
+  @apply absolute h-[5%] w-[170%] top-full -left-[105px] opacity-70 filter blur-[2em] content-[""];
+  background-color: var(--shadow);
+  transform: perspective(1.5em) rotateX(35deg) scale(1, 0.6);
+  animation: pulse 5s ease-in-out infinite;
+}
+
+@media (min-width: 360px) {
+  .neon-lighting::after {
+    @apply h-[5%] w-full top-full left-0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .neon-lighting::after {
+    @apply h-[5%] w-[170%] top-full -left-[105px];
+  }
+}
+
+/* CHECKBOX SECTION */
+
+.path {
+  @apply fill-none stroke-[6] [transition:stroke-dasharray_0.5s_ease,_stroke-dashoffset_0.5s_ease];
+  stroke: var(--text-color);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 241 9999999;
+  stroke-dashoffset: 0;
+}
+
+input:checked ~ svg .path {
+  stroke-dasharray: 70.5096664428711 9999999;
+  stroke-dashoffset: -262.2723388671875;
+}
+
+/* LOG IN & SIGN UP BUTTONS SECTION */
+
+.authentication-log-in-button,
+.authentication-sign-up-button {
+  @apply border-[0] bg-transparent [transition:all_ease-in-out_0.3s];
+  color: var(--text-color);
+  outline: 2px solid var(--button-outline);
+}
+
+.authentication-log-in-button:hover,
+.authentication-sign-up-button:hover {
+  background-color: #003d5c99;
+  outline: 2px solid #00537c;
+  transition: all ease-in-out 0.3s;
+}
+
+.authentication-log-in-button:active,
+.authentication-sign-up-button:active {
+  background-color: var(--button-state-background);
+}
+
+.authentication-log-in-button:disabled,
+.authentication-sign-up-button:disabled {
+  outline: 2px solid var(--button-outline);
+  background-color: var(--button-state-background);
+  opacity: 0.7;
+}
+
+/* FOOTER SECTION */
+
+.sign-up {
+  color: var(--text-color);
+}
+
+.sign-up a {
+  color: var(--text-color);
+}
