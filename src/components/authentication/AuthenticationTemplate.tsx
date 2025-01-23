@@ -5,6 +5,7 @@ import "@/shared/styles/form-components.css";
 import { motion } from "framer-motion";
 import { transition } from "@/utils/motions";
 import { Logo } from "@/shared/components/other/Logo";
+import Link from "next/link";
 
 type AuthenticationTemplateProperties = {
   title: string;
@@ -41,13 +42,13 @@ export const AuthenticationTemplate = ({
             </div>
             <p className="text-center text-[13px] sign-up">
               {footerText}
-              <a
+              <Link
                 rel="noopener noreferrer"
                 href={footerLinkHref}
                 className="ml-[6px] hover:text-[#f3f4f6da] underline transition"
               >
                 {footerLinkText}
-              </a>
+              </Link>
             </p>
           </div>
         </div>
