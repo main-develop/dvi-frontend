@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   personalInformationFields,
   personalInformationSchema,
@@ -38,33 +38,14 @@ import { useRouter } from "next/navigation";
 import { SectionWrapper } from "@/shared/components/settings-page/SectionWrapper";
 import { InputField } from "@/shared/components/form/InputField";
 import { GenderSelect } from "@/shared/components/form/GenderSelect";
-import { getUserPersonalInformation } from "@/api/data-requests/getUserPersonalInformation";
 import { LoadingText } from "@/shared/components/other/LoadingText";
 import { ModalDialog } from "@/shared/components/other/ModalDialog";
+import { useUserPersonalInformation } from "@/utils/useUserPersonalInformation";
 
 export const AccountSection = (): React.JSX.Element => {
   const router = useRouter();
   const accessToken = getCookie("accessToken");
-
-  const [personalInformation, setPersonalInformation] = useState<{
-    firstName: string;
-    lastName: string;
-    gender: "Male" | "Female" | "Rather not say";
-    email: string;
-  }>();
-
-  useEffect(() => {
-    async function getData() {
-      const accessToken = getCookie("accessToken");
-
-      const response = await getUserPersonalInformation(accessToken);
-      if (response.success) {
-        setPersonalInformation(response.data?.user);
-      }
-    }
-
-    getData();
-  }, []);
+  const userPersonalInformation = useUserPersonalInformation();
 
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [isDeletedSuccessfully, setDeletedSuccessfully] = useState(false);
@@ -85,7 +66,6 @@ export const AccountSection = (): React.JSX.Element => {
   return (
     <div className="flex flex-col relative py-3">
       <FormComponent
-        formName="personalInformation"
         schema={PersonalInformationSchema}
         defaultValues={{
           firstName: "",
@@ -95,6 +75,7 @@ export const AccountSection = (): React.JSX.Element => {
         onSubmit={async (data) =>
           submitChangePersonalInformationForm(data, accessToken)
         }
+        formName="changePersonalInformation"
       >
         {(form, response, isLoading) => (
           <SectionWrapper
@@ -113,7 +94,7 @@ export const AccountSection = (): React.JSX.Element => {
                     type={field.type}
                     id={field.id}
                     label={field.label}
-                    defaultValue={personalInformation?.[field.id] || ""}
+                    defaultValue={userPersonalInformation?.[field.id] || ""}
                     className="settings-section-input-group w-[260px]"
                   ></InputField>
                 </div>
@@ -122,7 +103,7 @@ export const AccountSection = (): React.JSX.Element => {
             <div className="mt-4 w-[260px]">
               <GenderSelect
                 form={form}
-                defaultValue={personalInformation?.gender || "Gender"}
+                defaultValue={userPersonalInformation?.gender || "Gender"}
                 className="settings-section-gender-select"
               ></GenderSelect>
             </div>
@@ -158,6 +139,7 @@ export const AccountSection = (): React.JSX.Element => {
         schema={ChangeEmailSchema}
         defaultValues={{ email: "", password: "" }}
         onSubmit={async (data) => submitChangeEmailForm(data, accessToken)}
+        formName="changeEmail"
       >
         {(form, response, isLoading) => (
           <SectionWrapper
@@ -216,6 +198,7 @@ export const AccountSection = (): React.JSX.Element => {
         schema={ChangePasswordSchema}
         defaultValues={{ newPassword: "", oldPassword: "" }}
         onSubmit={async (data) => submitChangePasswordForm(data, accessToken)}
+        formName="changePassword"
       >
         {(form, response, isLoading) => (
           <SectionWrapper
@@ -340,6 +323,7 @@ export const AccountSection = (): React.JSX.Element => {
                     onSubmit={async (data) =>
                       submitDeleteAccountForm(data, accessToken)
                     }
+                    formName="deleteAccount"
                   >
                     {(form, response, isLoading) => {
                       if (response && response.success) {

@@ -29,6 +29,7 @@ export const SignUpForm = (): React.JSX.Element => {
         gender: "Rather not say",
       }}
       onSubmit={async (data) => submitSignUpForm(data)}
+      formName="signUp"
     >
       {(form, response, isLoading) => {
         if (response?.success) {

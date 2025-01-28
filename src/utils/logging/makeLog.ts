@@ -1,9 +1,8 @@
-type logLevel = "INFO" | "ERROR";
+type logLevel = "INFO" | "WARNING" | "ERROR";
 
 export const makeLog = (
   logLevel: logLevel,
   eventType: string,
-  page: string,
   attributes = {}
 ) => {
   return JSON.stringify({
@@ -12,7 +11,6 @@ export const makeLog = (
     latency_ms: null,
     log_level: logLevel,
     event_type: eventType,
-    page: page,
     attributes: { ...attributes },
   });
 };

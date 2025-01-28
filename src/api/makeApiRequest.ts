@@ -27,6 +27,7 @@ export async function makeApiRequest<
 
     const responseData = await response.json().catch(() => null);
 
+    //TODO: Handle 5xx errors separately to provide more specific feedback.
     if ([200, 201].includes(response.status)) {
       return {
         success: true,

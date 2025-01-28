@@ -28,6 +28,7 @@ export const LogInForm = () => {
       schema={LogInSchema}
       defaultValues={{ email: "", password: "", rememberMe: false }}
       onSubmit={async (data) => submitLogInForm(data)}
+      formName="logIn"
     >
       {(form, response, isLoading) => {
         if (response?.success && response.data?.accessToken)

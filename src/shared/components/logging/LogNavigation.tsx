@@ -1,9 +1,9 @@
 "use client";
 
-import { sendNavigationLog } from "@/api/log-requests/sendNavigationLog";
-import { makeLog } from "@/utils/logger";
+import { makeLog } from "@/utils/logging/makeLog";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { sendLogRequest } from "@/api/log-requests/sendLogRequest";
 
 export const LogNavigation = (): null => {
   const pathname = usePathname();
@@ -15,12 +15,13 @@ export const LogNavigation = (): null => {
       const logAttributes = {
         referrer: document.referrer,
         user_agent: navigator.userAgent,
+        page: pathname,
         time_spent_s: timeSpentInSeconds,
       };
 
-      const log = makeLog("INFO", "page_navigation", pathname, logAttributes);
+      const log = makeLog("INFO", "page_navigation", logAttributes);
 
-      sendNavigationLog(JSON.parse(log));
+      sendLogRequest(JSON.parse(log));
     };
 
     window.addEventListener("beforeunload", () => {
