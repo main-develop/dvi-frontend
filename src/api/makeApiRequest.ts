@@ -27,6 +27,7 @@ export async function makeApiRequest<
 
     const responseData = await response.json().catch(() => null);
 
+    //TODO: Handle 5xx errors separately to provide more specific feedback.
     if ([200, 201].includes(response.status)) {
       return {
         success: true,
@@ -34,17 +35,13 @@ export async function makeApiRequest<
         type: "successResponse",
         data: responseData as TResponse,
       };
-    } else if ([400, 401, 403].includes(response.status)) {
-      return {
-        success: false,
-        message: responseData.message,
-        type: "validationError",
-      };
     } else {
       return {
         success: false,
-        message: "Unexpected error occurred",
-        type: "unexpectedError",
+        message: responseData.message || "Unexpected error occurred",
+        type: [400, 401, 403].includes(response.status)
+          ? "validationError"
+          : "unexpectedError",
       };
     }
   } catch (error) {

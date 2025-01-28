@@ -9,9 +9,10 @@ import LogOutIcon from "@/shared/assets/animations/log-out.json";
 import { handleLogOut } from "@/api/authentication-requests/handleLogOut";
 import { useRouter } from "next/navigation";
 import { getCookie } from "@/utils/getCookie";
-import { getUserPersonalInformation } from "@/api/data-requests/getUserPersonalInformation";
 import { SectionNavigation } from "@/shared/components/navigation/SectionNavigation";
 import { useIconAnimation } from "@/utils/useIconAnimation";
+import { logAuthenticationAction } from "@/utils/logging/logAuthenticationAction";
+import { useUserPersonalInformation } from "@/utils/useUserPersonalInformation";
 
 const navigationSections = [
   { name: "Account", icon: AccountIcon },
@@ -20,28 +21,9 @@ const navigationSections = [
 
 export const DashboardPageNavbar = (): React.JSX.Element => {
   const router = useRouter();
+  const userPersonalInformation = useUserPersonalInformation();
 
   const { playIconAnimation, setIconRef } = useIconAnimation();
-
-  const [personalInformation, setPersonalInformation] = useState<{
-    firstName: string;
-    lastName: string;
-    gender: string;
-    email: string;
-  }>();
-
-  useEffect(() => {
-    async function getData() {
-      const accessToken = getCookie("accessToken");
-
-      const response = await getUserPersonalInformation(accessToken);
-      if (response.success) {
-        setPersonalInformation(response.data?.user);
-      }
-    }
-
-    getData();
-  }, []);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -72,6 +54,8 @@ export const DashboardPageNavbar = (): React.JSX.Element => {
       document.cookie = `accessToken=; path=/; Secure; SameSite=Strict; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
       router.replace("/authentication/log-in");
     }
+
+    logAuthenticationAction("log_out", response, accessToken);
   };
 
   return (
@@ -112,13 +96,13 @@ export const DashboardPageNavbar = (): React.JSX.Element => {
                     <div className="relative w-[146px] font-medium text-gray-300">
                       <span className="flex">
                         <span className="relative truncate">
-                          {`${personalInformation?.firstName || ""} ${personalInformation?.lastName || ""}`}
-                          {`${personalInformation?.firstName || personalInformation?.lastName ? "" : "You"}`}
+                          {`${userPersonalInformation?.firstName || ""} ${userPersonalInformation?.lastName || ""}`}
+                          {`${userPersonalInformation?.firstName || userPersonalInformation?.lastName ? "" : "You"}`}
                         </span>
                       </span>
                     </div>
                     <p className="w-[146px] truncate font-normal text-sm text-gray-500">
-                      {personalInformation?.email || "example@example.com"}
+                      {userPersonalInformation?.email || "example@example.com"}
                     </p>
                   </div>
                 </div>
