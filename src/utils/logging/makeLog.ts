@@ -7,7 +7,7 @@ export const makeLog = (
 ) => {
   return JSON.stringify({
     sent_at: null,
-    received_at: null,
+    processed_at: null,
     latency_ms: null,
     log_level: logLevel,
     event_type: eventType,
