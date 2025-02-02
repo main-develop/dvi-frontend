@@ -6,6 +6,48 @@
   --log-in-button-background: #001b2980;
 }
 
+/* MOBILE MENU BUTTON SECTION */
+
+.mobile-menu-button {
+  transition-duration: 0.5s;
+}
+
+.bar {
+  @apply h-[3px] w-full rounded;
+  background-color: #003a61e6;
+}
+
+#middle-bar {
+  transition-duration: 0.8s;
+}
+
+.mobile-menu-button.toggled .bar {
+  position: absolute;
+  transition-duration: 0.5s;
+}
+
+.mobile-menu-button.toggled #middle-bar {
+  transform: scaleX(0);
+  transition-duration: 0.5s;
+}
+
+.mobile-menu-button.toggled #top-bar {
+  width: 100%;
+  transform: rotate(45deg);
+  transition-duration: 0.5s;
+}
+
+.mobile-menu-button.toggled #bottom-bar {
+  width: 100%;
+  transform: rotate(-45deg);
+  transition-duration: 0.5s;
+}
+
+.mobile-menu-button.toggled {
+  transition-duration: 0.5s;
+  transform: rotate(180deg);
+}
+
 /* LOG IN BUTTON SECTION */
 
 .log-in-button-wrapper {

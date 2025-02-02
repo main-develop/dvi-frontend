@@ -16,6 +16,22 @@
   background-color: #ffffff33;
 }
 
+/* ARROW SECTION */
+
+.arrow {
+  @apply z-[100000] -rotate-90 [transition:300ms];
+  fill: #9ca3af;
+}
+
+.menu-arrow {
+  fill: #95999c;
+  height: 13px;
+}
+
+.menu-arrow.active {
+  @apply rotate-0;
+}
+
 /* SECTIONS NAVIGATION SECTION */
 
 .section-navigation.active {

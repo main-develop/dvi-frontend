@@ -97,11 +97,6 @@
   background-color: var(--settings-section-background);
 }
 
-.arrow {
-  @apply z-[100000] -rotate-90 [transition:300ms];
-  fill: var(--text-color);
-}
-
 .options {
   @apply invisible max-h-0 top-full left-0 [transition:max-height_300ms_ease,_opacity_300ms_ease,_visibility_300ms_ease];
   border-color: var(--not-focused);
