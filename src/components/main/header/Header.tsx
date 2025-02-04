@@ -163,7 +163,7 @@ export const Header = (): React.JSX.Element | undefined => {
                           initial={{ height: 0 }}
                           animate={{ height: "auto" }}
                           exit={{ height: 0 }}
-                          transition={{ duration: 0.5, ease: "easeInOut" }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
                           style={{ overflow: "hidden", position: "relative" }}
                         >
                           {section.links.map((link) => (
