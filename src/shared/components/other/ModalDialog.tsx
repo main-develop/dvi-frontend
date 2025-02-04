@@ -1,5 +1,6 @@
 import { transition } from "@/utils/motions";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 type ModalDialogProperties = {
   isOpen: boolean;
@@ -10,7 +11,18 @@ export const ModalDialog = ({
   isOpen,
   children,
 }: ModalDialogProperties): React.JSX.Element | null => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+
+      return () => {
+        document.body.style.overflow = "auto";
+      };
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
+
   return (
     <motion.div
       initial="hidden"

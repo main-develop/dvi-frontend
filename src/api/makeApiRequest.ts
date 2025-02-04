@@ -44,10 +44,7 @@ export async function makeApiRequest<
           : "unexpectedError",
       };
     }
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.cause : "";
-    console.log(`Error during ${method} request to API:\n`, errorMessage);
-
+  } catch {
     return {
       success: false,
       type: "serverError",

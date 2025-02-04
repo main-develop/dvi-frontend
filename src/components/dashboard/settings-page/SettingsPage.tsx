@@ -18,7 +18,7 @@ export const SettingsPage = ({
       <SettingsPageSidebar
         activeSection={`${activeSection}`}
       ></SettingsPageSidebar>
-      <div className="w-[82%] overflow-x-hidden overscroll-none">
+      <div className="w-[82%] ml-[18%] overflow-x-hidden overscroll-none">
         {activeSection === "account" && <AccountSection />}
         {activeSection === "appearance" && <AppearanceSection />}
       </div>

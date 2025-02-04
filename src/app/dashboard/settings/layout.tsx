@@ -20,7 +20,7 @@ export default function SettingsLayout({
       initial={wasAnimated ? "visible" : "hidden"}
       animate="visible"
       variants={transition(0.4, 0.5)}
-      className="flex h-screen w-screen bg-[#131516]"
+      className="flex flex-col bg-[#131516]"
     >
       {children}
     </motion.div>

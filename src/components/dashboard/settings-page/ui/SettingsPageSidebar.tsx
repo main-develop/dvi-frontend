@@ -30,7 +30,7 @@ export const SettingsPageSidebar = ({
   };
 
   return (
-    <div className="relative w-[18%] sm:w-[18%] border-r-[2px] sidebar">
+    <div className="flex flex-col fixed h-screen w-[18%] border-r-[2px] sidebar">
       <div className="flex items-center justify-center sm:justify-normal mt-3 sm:ml-3">
         <Link
           href="/dashboard/home"
