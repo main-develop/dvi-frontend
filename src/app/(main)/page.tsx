@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { MainPage } from "@/components/main/main-page/MainPage";
 
-export default function HomeRedirect() {
-  redirect("/home");
+export default function Main(): React.JSX.Element {
+  return <MainPage></MainPage>;
 }

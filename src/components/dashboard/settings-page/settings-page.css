@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --submit-button-outline: #003d5c;
+  --submit-button-background: #00283c84;
+  --delete-account-button-border: #af0505;
+  --delete-account-button-background: #5b01015f;
+}
+
+/* SIDEBAR SECTION */
+
+.sidebar {
+  border-color: #ffffff33;
+  background-color: #131516;
+}
+
+/* PREVIOUS PAGE SECTION */
+
+.previous-page {
+  @apply [transition-property:all] ease-in-out duration-500;
+  border: solid 2px #9ca3afa3;
+}
+
+.previous-page:hover {
+  background-color: #0e0e0e;
+  border-color: #9ca3afc5;
+}
+
+.previous-page:active {
+  background-color: #000000;
+}
+
+/* SETTINGS SECTION NAVIGATION SECTION */
+
+.settings-section-navigation {
+  @apply h-11 rounded-lg justify-center;
+}
+
+@media (min-width: 640px) {
+  .settings-section-navigation {
+    justify-content: normal;
+  }
+}
+
+.settings-section-navigation span {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .settings-section-navigation span {
+    display: block;
+  }
+}
+
+.settings-section-navigation .settings-section-navigation-icon {
+  @apply h-[25px] w-[25px];
+}
+
+@media (min-width: 640px) {
+  .settings-section-navigation-icon {
+    margin-left: 12px;
+  }
+}
+
+/* SUBMIT BUTTON SECTION */
+
+.submit-button {
+  @apply [transition-property:all] ease-in-out duration-500;
+  outline: solid 2px var(--submit-button-outline);
+  background-color: var(--submit-button-background);
+}
+
+.submit-button:hover {
+  outline: solid 2px #004365;
+  background-color: #00375384;
+}
+
+.submit-button:hover span {
+  color: #015f8f;
+}
+
+.submit-button:active {
+  background-color: #001722;
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+}
+
+.submit-button:disabled:hover {
+  outline: solid 2px var(--submit-button-outline);
+  background-color: var(--submit-button-background);
+}
+
+/* DELETE BUTTON SECTION */
+
+.delete-account-button {
+  @apply [transition-property:all] ease-in-out duration-500;
+  border: solid 2px var(--delete-account-button-border);
+  background-color: var(--delete-account-button-background);
+}
+
+.delete-account-button:hover {
+  border: solid 2px #9b0404;
+  background-color: #6401018e;
+}
+
+.delete-account-button:hover span {
+  color: #c11111;
+}
+
+.delete-account-button:active {
+  background-color: #580808;
+}
+
+.delete-account-button:disabled {
+  opacity: 0.5;
+}
+
+.delete-account-button:disabled:hover {
+  border-color: var(--delete-account-button-border);
+  background-color: var(--delete-account-button-background);
+}
+
+.delete-account-button:disabled:hover span {
+  color: #db0b0b;
+}
+
+/* CANCEL BUTTON SECTION */
+
+.cancel-button {
+  @apply [transition-property:all] ease-in-out duration-500;
+  border: solid 2px #949698a6;
+  background-color: #b2b4b64f;
+}
+
+.cancel-button:hover {
+  border: solid 2px #82868b;
+  background-color: #94969890;
+}
+
+.cancel-button:hover span {
+  color: #1b1c1de8;
+}
+
+.cancel-button:active {
+  background-color: #3c3c3c;
+}

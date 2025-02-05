@@ -26,26 +26,48 @@ export function slideInFromRight(delay: number) {
   };
 }
 
-export const slideInFromTop = {
-  hidden: { y: -100, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      delay: 0.5,
-      duration: 0.5,
+export function slideInOut(
+  hiddenY: number,
+  visibleY: number,
+  delay: number,
+  duration: number
+) {
+  return {
+    hidden: { y: hiddenY, opacity: 0 },
+    visible: {
+      y: visibleY,
+      opacity: 1,
+      transition: {
+        delay: delay,
+        duration: duration,
+      },
     },
-  },
-};
+  };
+}
 
-export const transition = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      delay: 0.4,
-      duration: 0.5,
-      ease: "easeInOut",
+export function transition(
+  delay: number,
+  duration: number,
+  fadeOutOpacity: number = 1,
+  fadeOutDelay: number = 0
+) {
+  return {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: delay,
+        duration: duration,
+        ease: "easeInOut",
+      },
     },
-  },
-};
+    fadeOut: {
+      opacity: fadeOutOpacity,
+      transition: {
+        delay: fadeOutDelay,
+        duration: duration,
+        ease: "easeInOut",
+      },
+    },
+  };
+}

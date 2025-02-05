@@ -1,14 +1,14 @@
-import { AuthTemplate } from "../AuthTemplate";
+import { AuthenticationTemplate } from "../AuthenticationTemplate";
 import { SignUpForm } from "./ui/SignUpForm";
 
 export const SignUpPage = (): React.JSX.Element => {
   return (
-    <AuthTemplate
+    <AuthenticationTemplate
       title="Create an account"
-      form={<SignUpForm />}
-      footerText="Already have an account? "
+      formComponent={<SignUpForm />}
+      footerText="Already have an account?"
       footerLinkText="Log in"
       footerLinkHref="/authentication/log-in"
-    ></AuthTemplate>
+    ></AuthenticationTemplate>
   );
 };
