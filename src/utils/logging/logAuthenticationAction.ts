@@ -22,6 +22,6 @@ export const logAuthenticationAction = (
     logAttributes.user_id = userId || "";
   }
 
-  const log = makeLog("INFO", eventType, logAttributes);
+  const log = makeLog(eventType, logAttributes);
   sendLogRequest(JSON.parse(log));
 };
