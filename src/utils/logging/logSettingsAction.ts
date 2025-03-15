@@ -56,6 +56,6 @@ export const logSettingsAction = <TSchema extends zod.ZodTypeAny>(
     logAttributes.previous_email = previousInfo?.email;
   }
 
-  const log = makeLog("INFO", eventType, logAttributes);
+  const log = makeLog(eventType, logAttributes);
   sendLogRequest(JSON.parse(log));
 };

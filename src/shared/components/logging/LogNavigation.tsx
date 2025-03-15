@@ -19,7 +19,7 @@ export const LogNavigation = (): null => {
         time_spent_s: timeSpentInSeconds,
       };
 
-      const log = makeLog("INFO", "page_navigation", logAttributes);
+      const log = makeLog("page_navigation", logAttributes);
 
       sendLogRequest(JSON.parse(log));
     };
