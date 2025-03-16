@@ -12,14 +12,14 @@ export const LogNavigation = (): null => {
   useEffect(() => {
     const sendLog = () => {
       const timeSpentInSeconds = (new Date().getTime() - startTime) / 1000;
-      const logAttributes = {
+      const logDetails = {
         referrer: document.referrer,
         user_agent: navigator.userAgent,
         page: pathname,
         time_spent_s: timeSpentInSeconds,
       };
 
-      const log = makeLog("page_navigation", logAttributes);
+      const log = makeLog("page_navigation", logDetails);
 
       sendLogRequest(JSON.parse(log));
     };
