@@ -1,3 +1,16 @@
+import crypto from "crypto";
+
+const SECRET_KEY = process.env.SECRET_KEY;
+
+function generate_signature(payload: Record<string, unknown> | null) {
+  if (SECRET_KEY && payload) {
+    return crypto
+      .createHmac("sha256", SECRET_KEY)
+      .update(JSON.stringify(payload))
+      .digest("hex");
+  }
+}
+
 export async function makeApiRequest<
   TResponse extends Record<string, unknown> | undefined,
 >(
@@ -16,10 +29,13 @@ export async function makeApiRequest<
   data?: TResponse;
 }> {
   try {
+    const signature = generate_signature(body);
+
     const response = await fetch(url, {
       method: method,
       headers: {
         "Content-Type": "application/json",
+        ...(signature && { "X-Signature": signature }),
         ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
       },
       body: body ? JSON.stringify(body) : null,

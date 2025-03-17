@@ -22,7 +22,7 @@ export const logSettingsAction = <TSchema extends zod.ZodTypeAny>(
     ? Object.keys(previousInfo).length
     : 0;
 
-  const logAttributes: Record<string, unknown> = {
+  const logDetails: Record<string, unknown> = {
     user_id: userId,
     success: response.success,
     ...(response.success === false && { message: response.message }),
@@ -46,16 +46,16 @@ export const logSettingsAction = <TSchema extends zod.ZodTypeAny>(
       );
 
       if (Object.keys(changedFields.new_info).length > 0) {
-        Object.assign(logAttributes, changedFields);
+        Object.assign(logDetails, changedFields);
       } else return;
     }
   }
 
   if (eventType === "change_email" && response.success) {
-    logAttributes.new_email = data.email;
-    logAttributes.previous_email = previousInfo?.email;
+    logDetails.new_email = data.email;
+    logDetails.previous_email = previousInfo?.email;
   }
 
-  const log = makeLog("INFO", eventType, logAttributes);
+  const log = makeLog(eventType, logDetails);
   sendLogRequest(JSON.parse(log));
 };

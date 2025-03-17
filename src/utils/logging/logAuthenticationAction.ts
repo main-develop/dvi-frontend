@@ -9,7 +9,7 @@ export const logAuthenticationAction = (
   response: Response,
   accessToken?: string
 ) => {
-  const logAttributes: Record<string, unknown> = {
+  const logDetails: Record<string, unknown> = {
     user_id: "",
     success: response.success,
     ...(response.success === false && { message: response.message }),
@@ -19,9 +19,9 @@ export const logAuthenticationAction = (
     const currentAccessToken = accessToken || getCookie("accessToken");
     const userId = parseJwt(currentAccessToken)?.sub;
 
-    logAttributes.user_id = userId || "";
+    logDetails.user_id = userId || "";
   }
 
-  const log = makeLog("INFO", eventType, logAttributes);
+  const log = makeLog(eventType, logDetails);
   sendLogRequest(JSON.parse(log));
 };
