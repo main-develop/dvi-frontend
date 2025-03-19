@@ -53,10 +53,10 @@ export const Header = (): React.JSX.Element | undefined => {
   useEffect(() => {
     if (mobileMenuOpen) {
       setMobileMenuVisible(true);
-      document.body.style.overflow = "hidden";
+      document.body.style.overflowY = "hidden";
 
       return () => {
-        document.body.style.overflow = "auto";
+        document.body.style.overflowY = "auto";
         setOpenMenuSections(navigationSections.map(() => false));
       };
     }
@@ -64,11 +64,15 @@ export const Header = (): React.JSX.Element | undefined => {
 
   return (
     <header
-      className="sticky top-0 z-50 backdrop-blur-sm shadow-lg"
+      className={`sticky top-0 z-50 backdrop-blur-sm shadow-lg ${mobileMenuOpen ? "bg-transparent/70" : ""}`}
       id="header"
     >
       <div className="flex px-4 py-4 justify-between items-center">
-        <div onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+        <div className="hidden sm:block">
+          <Logo className="main-logo"></Logo>
+        </div>
+        {/* Mobile logo logic */}
+        <div onClick={() => setMobileMenuOpen(false)} className="sm:hidden">
           <Logo className="main-logo"></Logo>
         </div>
         <nav className="sm:flex items-center gap-6">
@@ -93,6 +97,7 @@ export const Header = (): React.JSX.Element | undefined => {
           <div className="sm:flex hidden">
             <LogInButton></LogInButton>
           </div>
+          {/* Mobile menu button */}
           <div className="sm:hidden pl-10">
             <label
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -117,7 +122,7 @@ export const Header = (): React.JSX.Element | undefined => {
               definition === "hidden" ? setMobileMenuVisible(false) : null
             }
             variants={slideInOut(-30, 0, 0, 0.5)}
-            className="fixed sm:hidden h-screen w-full bg-transparent/40"
+            className="fixed sm:hidden h-screen w-full bg-transparent/80"
             id="mobile-menu"
           >
             <div className="px-4 pt-2 pb-3 space-y-1">
@@ -184,7 +189,7 @@ export const Header = (): React.JSX.Element | undefined => {
               </div>
             </div>
           </motion.div>
-          <div className="h-screen w-full after:blur-md"></div>
+          <div className="fixed -z-50 h-screen w-full backdrop-blur-sm"></div>
         </div>
       )}
     </header>
